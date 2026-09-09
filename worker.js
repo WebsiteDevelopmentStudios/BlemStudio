@@ -4,9 +4,8 @@ const DISCORD_REDIRECT_URI =
 const SESSION_COOKIE = "__Host-blemm_session";
 const STATE_COOKIE = "__Host-discord_state";
 
-const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
-const STATE_MAX_AGE = 60 * 10; // 10 minutes
-
+const SESSION_MAX_AGE = 60 * 60 * 24 * 7;
+const STATE_MAX_AGE = 60 * 10;
 
 export default {
   async fetch(request, env) {
@@ -18,7 +17,7 @@ export default {
       return startDiscordLogin(env);
     }
 
-    // Discord OAuth callback
+    // Discord callback
     if (pathname === "/auth/callback") {
       return handleDiscordCallback(request, env);
     }
@@ -28,12 +27,12 @@ export default {
       return logout();
     }
 
-    // Current logged-in user
+    // Current Discord user
     if (pathname === "/api/session") {
       return getSession(request, env);
     }
 
-    // Protect the actual website pages
+    // Protect website pages
     if (isProtectedPage(pathname)) {
       const session = await getValidSession(request, env);
 
@@ -45,82 +44,79 @@ export default {
       }
     }
 
-    // Let Cloudflare serve your normal files
     return env.ASSETS.fetch(request);
   }
 };
 
 
-// --------------------------------------------------
-// PAGE PROTECTION
-// --------------------------------------------------
+// ================================
+// PROTECTED PAGES
+// ================================
 
 function isProtectedPage(pathname) {
   return (
     pathname === "/" ||
     pathname === "/index.html" ||
-    pathname === "/commissions.html" ||
-    pathname.endsWith(".html")
+    pathname === "/commissions.html"
   );
 }
 
 
-// --------------------------------------------------
-// DISCORD LOGIN
-// --------------------------------------------------
+// ================================
+// START DISCORD LOGIN
+// ================================
 
 async function startDiscordLogin(env) {
   const state = randomString(32);
 
-  const authorizeURL = new URL(
+  const discordURL = new URL(
     "https://discord.com/oauth2/authorize"
   );
 
-  authorizeURL.searchParams.set(
+  discordURL.searchParams.set(
     "client_id",
     env.DISCORD_CLIENT_ID
   );
 
-  authorizeURL.searchParams.set(
+  discordURL.searchParams.set(
     "response_type",
     "code"
   );
 
-  authorizeURL.searchParams.set(
-    "redirect_uri",
-    DISCORD_REDIRECT_URI
-  );
-
-  authorizeURL.searchParams.set(
+  discordURL.searchParams.set(
     "scope",
     "identify"
   );
 
-  authorizeURL.searchParams.set(
+  discordURL.searchParams.set(
     "state",
     state
   );
 
-  return new Response(null, {
+  discordURL.searchParams.set(
+    "redirect_uri",
+    DISCORD_REDIRECT_URI
+  );
+
+  const response = new Response(null, {
     status: 302,
     headers: {
-      Location: authorizeURL.toString(),
-
-      "Set-Cookie":
-        `${STATE_COOKIE}=${state}; ` +
-        `Max-Age=${STATE_MAX_AGE}; ` +
-        `Path=/; ` +
-        `HttpOnly; ` +
-        `Secure; ` +
-        `SameSite=Lax`
+      "Location": discordURL.toString()
     }
   });
+
+  response.headers.append(
+    "Set-Cookie",
+    `${STATE_COOKIE}=${state}; Max-Age=${STATE_MAX_AGE}; Path=/; HttpOnly; Secure; SameSite=Lax`
+  );
+
+  return response;
 }
 
 
-// --------------------------------------------------
+// ================================
 // DISCORD CALLBACK
-// --------------------------------------------------
+// ================================
 
 async function handleDiscordCallback(request, env) {
   const url = new URL(request.url);
@@ -129,24 +125,34 @@ async function handleDiscordCallback(request, env) {
   const returnedState = url.searchParams.get("state");
 
   if (!code || !returnedState) {
-    return errorPage("Missing Discord authorization information.");
+    return errorPage(
+      "Discord did not provide a valid authorization code."
+    );
   }
 
-  const cookies = parseCookies(request.headers.get("Cookie"));
+  const cookies = parseCookies(
+    request.headers.get("Cookie")
+  );
+
   const savedState = cookies[STATE_COOKIE];
 
   if (!savedState || savedState !== returnedState) {
-    return errorPage("Invalid or expired login request.");
+    return errorPage(
+      "Your Discord login session expired. Please try again."
+    );
   }
 
-  // Exchange authorization code for access token
+  // Exchange code for Discord access token
   const tokenResponse = await fetch(
-    "https://discord.com/api/v10/oauth2/token",
+    "https://discord.com/api/oauth2/token",
     {
       method: "POST",
+
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type":
+          "application/x-www-form-urlencoded"
       },
+
       body: new URLSearchParams({
         client_id: env.DISCORD_CLIENT_ID,
         client_secret: env.DISCORD_CLIENT_SECRET,
@@ -158,92 +164,98 @@ async function handleDiscordCallback(request, env) {
   );
 
   if (!tokenResponse.ok) {
-    return errorPage("Discord token exchange failed.");
+    const errorText = await tokenResponse.text();
+
+    return errorPage(
+      `Discord token exchange failed.<br><br>
+       <small>${escapeHTML(errorText)}</small>`
+    );
   }
 
   const tokenData = await tokenResponse.json();
 
-  const accessToken = tokenData.access_token;
-
-  if (!accessToken) {
-    return errorPage("Discord did not provide an access token.");
+  if (!tokenData.access_token) {
+    return errorPage(
+      "Discord did not return an access token."
+    );
   }
 
-  // Get the actual Discord account
+  // Get Discord account
   const userResponse = await fetch(
     "https://discord.com/api/v10/users/@me",
     {
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization:
+          `Bearer ${tokenData.access_token}`
       }
     }
   );
 
   if (!userResponse.ok) {
-    return errorPage("Could not retrieve your Discord account.");
+    return errorPage(
+      "We could not retrieve your Discord account."
+    );
   }
 
   const user = await userResponse.json();
 
-  /*
-    IMPORTANT:
-
-    user.username = actual Discord username
-    user.global_name = display name
-
-    We intentionally use username, NOT global_name.
-  */
-
-  const sessionData = {
+  // IMPORTANT:
+  // username = actual Discord username
+  // global_name = display name
+  const session = {
     id: user.id,
     username: user.username,
-    expires: Date.now() + SESSION_MAX_AGE * 1000
+    expires:
+      Date.now() +
+      SESSION_MAX_AGE * 1000
   };
 
-  const sessionPayload = base64urlEncode(
-    JSON.stringify(sessionData)
+  const payload = base64urlEncode(
+    JSON.stringify(session)
   );
 
   const signature = await sign(
-    sessionPayload,
+    payload,
     env.SESSION_SECRET
   );
 
   const sessionCookie =
-    `${SESSION_COOKIE}=${sessionPayload}.${signature}; ` +
+    `${SESSION_COOKIE}=${payload}.${signature}; ` +
     `Max-Age=${SESSION_MAX_AGE}; ` +
     `Path=/; ` +
     `HttpOnly; ` +
     `Secure; ` +
     `SameSite=Lax`;
 
-  const clearStateCookie =
-    `${STATE_COOKIE}=; ` +
-    `Max-Age=0; ` +
-    `Path=/; ` +
-    `HttpOnly; ` +
-    `Secure; ` +
-    `SameSite=Lax`;
-
-  return new Response(null, {
+  const response = new Response(null, {
     status: 302,
     headers: {
-      Location: "/",
-      "Set-Cookie": [
-        sessionCookie,
-        clearStateCookie
-      ]
+      "Location": "/"
     }
   });
+
+  // Add cookies separately
+  response.headers.append(
+    "Set-Cookie",
+    sessionCookie
+  );
+
+  response.headers.append(
+    "Set-Cookie",
+    `${STATE_COOKIE}=; Max-Age=0; Path=/; HttpOnly; Secure; SameSite=Lax`
+  );
+
+  return response;
 }
 
 
-// --------------------------------------------------
+// ================================
 // SESSION API
-// --------------------------------------------------
+// ================================
 
 async function getSession(request, env) {
-  const session = await getValidSession(request, env);
+  const session =
+    await getValidSession(request, env);
 
   if (!session) {
     return new Response(
@@ -253,7 +265,10 @@ async function getSession(request, env) {
       {
         status: 401,
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type":
+            "application/json",
+          "Cache-Control":
+            "no-store"
         }
       }
     );
@@ -268,24 +283,27 @@ async function getSession(request, env) {
     {
       status: 200,
       headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-store"
+        "Content-Type":
+          "application/json",
+        "Cache-Control":
+          "no-store"
       }
     }
   );
 }
 
 
-// --------------------------------------------------
-// VALIDATE SESSION
-// --------------------------------------------------
+// ================================
+// CHECK SESSION
+// ================================
 
 async function getValidSession(request, env) {
   const cookies = parseCookies(
     request.headers.get("Cookie")
   );
 
-  const cookie = cookies[SESSION_COOKIE];
+  const cookie =
+    cookies[SESSION_COOKIE];
 
   if (!cookie) {
     return null;
@@ -300,89 +318,104 @@ async function getValidSession(request, env) {
   const payload = parts[0];
   const signature = parts[1];
 
-  const validSignature = await verify(
-    payload,
-    signature,
-    env.SESSION_SECRET
-  );
+  const valid =
+    await verify(
+      payload,
+      signature,
+      env.SESSION_SECRET
+    );
 
-  if (!validSignature) {
+  if (!valid) {
     return null;
   }
 
   try {
-    const session = JSON.parse(
-      base64urlDecode(payload)
-    );
+    const session =
+      JSON.parse(
+        base64urlDecode(payload)
+      );
 
-    if (!session.expires || Date.now() > session.expires) {
+    if (
+      !session.id ||
+      !session.username ||
+      !session.expires
+    ) {
       return null;
     }
 
-    if (!session.id || !session.username) {
+    if (Date.now() > session.expires) {
       return null;
     }
 
     return session;
+
   } catch {
     return null;
   }
 }
 
 
-// --------------------------------------------------
+// ================================
 // LOGOUT
-// --------------------------------------------------
+// ================================
 
 function logout() {
-  return new Response(null, {
+  const response = new Response(null, {
     status: 302,
     headers: {
-      Location: "/login.html",
-
-      "Set-Cookie":
-        `${SESSION_COOKIE}=; ` +
-        `Max-Age=0; ` +
-        `Path=/; ` +
-        `HttpOnly; ` +
-        `Secure; ` +
-        `SameSite=Lax`
+      "Location": "/login.html"
     }
   });
+
+  response.headers.append(
+    "Set-Cookie",
+    `${SESSION_COOKIE}=; Max-Age=0; Path=/; HttpOnly; Secure; SameSite=Lax`
+  );
+
+  return response;
 }
 
 
-// --------------------------------------------------
+// ================================
 // CRYPTO
-// --------------------------------------------------
+// ================================
 
 function randomString(length) {
-  const bytes = new Uint8Array(length);
+  const bytes =
+    new Uint8Array(length);
+
   crypto.getRandomValues(bytes);
 
   return Array.from(bytes)
-    .map(byte => byte.toString(16).padStart(2, "0"))
+    .map(
+      byte =>
+        byte
+          .toString(16)
+          .padStart(2, "0")
+    )
     .join("");
 }
 
 
 async function sign(value, secret) {
-  const key = await crypto.subtle.importKey(
-    "raw",
-    new TextEncoder().encode(secret),
-    {
-      name: "HMAC",
-      hash: "SHA-256"
-    },
-    false,
-    ["sign"]
-  );
+  const key =
+    await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(secret),
+      {
+        name: "HMAC",
+        hash: "SHA-256"
+      },
+      false,
+      ["sign"]
+    );
 
-  const signature = await crypto.subtle.sign(
-    "HMAC",
-    key,
-    new TextEncoder().encode(value)
-  );
+  const signature =
+    await crypto.subtle.sign(
+      "HMAC",
+      key,
+      new TextEncoder().encode(value)
+    );
 
   return base64urlFromBytes(
     new Uint8Array(signature)
@@ -390,34 +423,40 @@ async function sign(value, secret) {
 }
 
 
-async function verify(value, signature, secret) {
-  const key = await crypto.subtle.importKey(
-    "raw",
-    new TextEncoder().encode(secret),
-    {
-      name: "HMAC",
-      hash: "SHA-256"
-    },
-    false,
-    ["verify"]
-  );
-
+async function verify(
+  value,
+  signature,
+  secret
+) {
   try {
+    const key =
+      await crypto.subtle.importKey(
+        "raw",
+        new TextEncoder().encode(secret),
+        {
+          name: "HMAC",
+          hash: "SHA-256"
+        },
+        false,
+        ["verify"]
+      );
+
     return await crypto.subtle.verify(
       "HMAC",
       key,
       base64urlToBytes(signature),
       new TextEncoder().encode(value)
     );
+
   } catch {
     return false;
   }
 }
 
 
-// --------------------------------------------------
+// ================================
 // BASE64URL
-// --------------------------------------------------
+// ================================
 
 function base64urlEncode(value) {
   return base64urlFromBytes(
@@ -441,9 +480,9 @@ function base64urlFromBytes(bytes) {
 
 
 function base64urlDecode(value) {
-  const bytes = base64urlToBytes(value);
-
-  return new TextDecoder().decode(bytes);
+  return new TextDecoder().decode(
+    base64urlToBytes(value)
+  );
 }
 
 
@@ -465,31 +504,29 @@ function base64urlToBytes(value) {
 }
 
 
-// --------------------------------------------------
+// ================================
 // COOKIES
-// --------------------------------------------------
+// ================================
 
-function parseCookies(cookieHeader) {
+function parseCookies(header) {
   const cookies = {};
 
-  if (!cookieHeader) {
+  if (!header) {
     return cookies;
   }
 
-  for (const part of cookieHeader.split(";")) {
+  for (const part of header.split(";")) {
     const index = part.indexOf("=");
 
     if (index === -1) {
       continue;
     }
 
-    const name = part
-      .slice(0, index)
-      .trim();
+    const name =
+      part.slice(0, index).trim();
 
-    const value = part
-      .slice(index + 1)
-      .trim();
+    const value =
+      part.slice(index + 1).trim();
 
     cookies[name] = value;
   }
@@ -498,66 +535,88 @@ function parseCookies(cookieHeader) {
 }
 
 
-// --------------------------------------------------
+// ================================
+// HTML ESCAPING
+// ================================
+
+function escapeHTML(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+// ================================
 // ERROR PAGE
-// --------------------------------------------------
+// ================================
 
 function errorPage(message) {
   return new Response(
-    `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Blemmished Studios - Login Error</title>
-      <style>
-        body {
-          background: #0d0912;
-          color: white;
-          font-family: Arial, sans-serif;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          min-height: 100vh;
-          text-align: center;
-        }
+    `<!DOCTYPE html>
+<html>
+<head>
+<title>Blemmished Studios - Login Error</title>
 
-        .box {
-          background: #19111f;
-          border: 1px solid #32203d;
-          border-radius: 16px;
-          padding: 35px;
-          max-width: 450px;
-        }
+<style>
+body {
+  background: #0d0912;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
 
-        h1 {
-          color: #b77aff;
-        }
+.box {
+  background: #19111f;
+  border: 1px solid #32203d;
+  border-radius: 16px;
+  padding: 35px;
+  max-width: 500px;
+  text-align: center;
+}
 
-        p {
-          color: #c8b9d2;
-        }
+h1 {
+  color: #b77aff;
+}
 
-        a {
-          color: #b77aff;
-        }
-      </style>
-    </head>
+p {
+  color: #c8b9d2;
+  line-height: 1.6;
+}
 
-    <body>
-      <div class="box">
-        <h1>Login Error</h1>
-        <p>${message}</p>
-        <p>
-          <a href="/login.html">Return to login</a>
-        </p>
-      </div>
-    </body>
-    </html>
-    `,
+a {
+  color: #b77aff;
+}
+</style>
+</head>
+
+<body>
+<div class="box">
+<h1>Login Error</h1>
+
+<p>${message}</p>
+
+<p>
+<a href="/login.html">
+Return to login
+</a>
+</p>
+
+</div>
+</body>
+</html>`,
     {
       status: 400,
       headers: {
-        "Content-Type": "text/html; charset=UTF-8"
+        "Content-Type":
+          "text/html; charset=UTF-8"
       }
     }
   );
