@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blemmished Studios - Login</title>
+
+<style>
+body {
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 15px;
+    width: 320px;
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    width: 95%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: #5865F2;
+    color: white;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: .8;
+}
+
+#message {
+    color: #ff5555;
+    margin-top: 15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h1>Blemmished</h1>
+<p>Login or Create Account</p>
+
+<input id="username" placeholder="Username">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<button onclick="createAccount()">Create Account</button>
+
+<p id="message"></p>
+
+</div>
+
+
+<script src="auth.js"></script>
+
+</body>
+</html>
