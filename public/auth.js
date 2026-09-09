@@ -1,22 +1,21 @@
 function loginWithDiscord() {
+    window.location.href = "/auth/discord";
+}
 
-    /*
-        Your Cloudflare Worker will handle the
-        actual Discord OAuth2 login.
+async function checkLogin() {
+    try {
+        const response = await fetch("/api/session", {
+            credentials: "include"
+        });
 
-        Change this URL once we create the Worker.
+        if (response.ok) {
+            window.location.href = "/";
+        }
+    } catch (error) {
+        console.error("Login check failed:", error);
+    }
+}
 
-        Example:
-
-        https://auth.blemmished.com/auth/discord
-
-        or
-
-        https://your-worker-name.workers.dev/auth/discord
-    */
-
-    const discordLoginURL =
-        "https://YOUR-CLOUDFLARE-WORKER-URL/auth/discord";
-
-    window.location.href = discordLoginURL;
+if (window.location.pathname === "/login.html") {
+    checkLogin();
 }
