@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blemmished Studios</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0d0912;
+            color: white;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 70px;
+            background: #150d1d;
+            border-bottom: 1px solid #30203a;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #a855f7;
+        }
+
+        nav a {
+            color: #b9adbf;
+            text-decoration: none;
+            margin-left: 25px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #b77aff;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            min-height: 560px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 80px 20px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #55227a 0%,
+                    #2b143c 35%,
+                    #110a16 75%
+                );
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #b77aff;
+        }
+
+        .hero p {
+            color: #d1c6d8;
+            font-size: 19px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 15px 28px;
+
+            background: #8b4dcc;
+            color: white;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #a55ee8;
+            transform: translateY(-2px);
+        }
+
+
+        /* SECTIONS */
+
+        section {
+            padding: 90px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .section-title span {
+            color: #a855f7;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #a99aad;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 25px;
+
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .card {
+            background: #19111f;
+
+            border: 1px solid #32203d;
+
+            border-radius: 10px;
+
+            padding: 30px;
+
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+
+            border-color: #8b4dcc;
+
+            box-shadow:
+                0 10px 30px
+                rgba(168, 85, 247, 0.15);
+        }
+
+        .card-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #a99aad;
+            line-height: 1.6;
+        }
+
+
+        /* MISSION */
+
+        .mission {
+            background: #150d1d;
+
+            border-top: 1px solid #281832;
+            border-bottom: 1px solid #281832;
+
+            text-align: center;
+        }
+
+        .mission-box {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .mission p {
+            color: #b9acbf;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+
+        /* FUTURE CARDS */
+
+        .future-card {
+            border-top: 3px solid #a855f7;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #09060c;
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #716675;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 13px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .hero h1 {
+                font-size: 50px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 65px 6%;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+        <span>Blemmished</span> Studios
+    </div>
+
+    <div>
+        <a href="index.html">Home</a>
+        <a href="#">Plugins</a>
+        <a href="#">About</a>
+    </div>
+
+</nav>
+
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            <span>Welcome</span>
+        </h1>
+
+        <p>
+            Welcome to Blemmished Studios — a place where
+            Minecraft servers can get unique plugins, add-ons,
+            and custom systems built around their ideas.
+        </p>
+
+        <a class="button" href="#">
+            Explore Plugins
+        </a>
+
+    </div>
+
+</header>
+
+
+<section>
+
+    <h2 class="section-title">
+        What We're <span>Building</span>
+    </h2>
+
+    <p class="section-description">
+        Blemmished Studios is focused on creating unique
+        Minecraft plugins and add-ons designed to give
+        servers more possibilities and personality.
+    </p>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">⚙️</div>
+
+            <h3>Custom Plugins</h3>
+
+            <p>
+                Powerful plugins designed to add new mechanics,
+                commands, features, and systems to Minecraft servers.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">✨</div>
+
+            <h3>Unique Ideas</h3>
+
+            <p>
+                We want to create plugins that help servers
+                stand out and offer players something different.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🛠️</div>
+
+            <h3>Server Tools</h3>
+
+            <p>
+                Useful tools and systems that make running
+                and managing a Minecraft server easier.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🌎</div>
+
+            <h3>Built for Servers</h3>
+
+            <p>
+                Our goal is to create reliable features for
+                communities of all different sizes.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="mission">
+
+    <div class="mission-box">
+
+        <h2 class="section-title">
+            Our <span>Goal</span>
+        </h2>
+
+        <p>
+            Minecraft servers should be able to create their
+            own identity. Blemmished Studios aims to give server
+            owners the tools they need to build unique experiences
+            for their players.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <h2 class="section-title">
+        What's <span>Coming</span>
+    </h2>
+
+    <p class="section-description">
+        We're still building. More plugins, features,
+        and services will be added to Blemmished Studios
+        over time.
+    </p>
+
+
+    <div class="cards">
+
+        <div class="card future-card">
+
+            <h3>Plugin Store</h3>
+
+            <p>
+                Browse plugins and add-ons created for
+                Minecraft servers.
+            </p>
+
+        </div>
+
+
+        <div class="card future-card">
+
+            <h3>Custom Commissions</h3>
+
+            <p>
+                Request a custom plugin designed specifically
+                for your server.
+            </p>
+
+        </div>
+
+
+        <div class="card future-card">
+
+            <h3>Downloads</h3>
+
+            <p>
+                Access your purchased plugins, updates,
+                and files through your account.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 <strong>Blemmished Studios</strong>.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+</html>
