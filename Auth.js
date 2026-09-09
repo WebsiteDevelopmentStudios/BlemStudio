@@ -1,67 +1,22 @@
-function createAccount() {
+function loginWithDiscord() {
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    /*
+        Your Cloudflare Worker will handle the
+        actual Discord OAuth2 login.
 
+        Change this URL once we create the Worker.
 
-    if(username === "" || password === "") {
-        message("Please fill in everything");
-        return;
-    }
+        Example:
 
+        https://auth.blemmished.com/auth/discord
 
-    let users = JSON.parse(localStorage.getItem("users")) || {};
+        or
 
+        https://your-worker-name.workers.dev/auth/discord
+    */
 
-    if(users[username]) {
-        message("Username already exists");
-        return;
-    }
+    const discordLoginURL =
+        "https://YOUR-CLOUDFLARE-WORKER-URL/auth/discord";
 
-
-    users[username] = {
-        password: password
-    };
-
-
-    localStorage.setItem("users", JSON.stringify(users));
-
-
-    localStorage.setItem("loggedIn", username);
-
-
-    window.location.href = "index.html";
-}
-
-
-
-function login() {
-
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-
-    let users = JSON.parse(localStorage.getItem("users")) || {};
-
-
-    if(users[username] && users[username].password === password) {
-
-        localStorage.setItem("loggedIn", username);
-
-        window.location.href = "index.html";
-
-    } else {
-
-        message("Wrong username or password");
-
-    }
-
-}
-
-
-
-function message(text) {
-
-    document.getElementById("message").innerText = text;
-
+    window.location.href = discordLoginURL;
 }
