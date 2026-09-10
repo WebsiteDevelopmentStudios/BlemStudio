@@ -1,522 +1,1018 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Blemmished Studios</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Blemmished Studios</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #0d0912;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ================================
+       NAVBAR
+    ================================ */
+
+    nav {
+      height: 72px;
+      background: #150d1d;
+      border-bottom: 1px solid #291832;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 7%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: #a855f7;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      color: #c8b9d2;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #ffffff;
+    }
+
+    .nav-link.active {
+      color: #ffffff;
+    }
+
+    /* ================================
+       USER MENU
+    ================================ */
+
+    .user-area {
+      position: relative;
+    }
+
+    .user-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      background: #19111f;
+      border: 1px solid #32203d;
+      border-radius: 999px;
+
+      padding: 6px 12px 6px 6px;
+
+      color: white;
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .user-button:hover {
+      border-color: #8b4dcc;
+      background: #211529;
+    }
+
+    .user-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #32203d;
+    }
+
+    .username {
+      font-size: 14px;
+      font-weight: 600;
+      max-width: 130px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .arrow {
+      font-size: 11px;
+      color: #a995b4;
+    }
+
+    .user-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+
+      width: 190px;
+
+      background: #19111f;
+      border: 1px solid #32203d;
+      border-radius: 12px;
+
+      padding: 8px;
+
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.45);
+
+      display: none;
+    }
+
+    .user-menu.show {
+      display: block;
+    }
+
+    .menu-user {
+      padding: 10px 12px;
+      color: #a995b4;
+      font-size: 12px;
+      border-bottom: 1px solid #32203d;
+      margin-bottom: 6px;
+    }
+
+    .menu-item {
+      display: block;
+      width: 100%;
+
+      padding: 11px 12px;
+
+      border-radius: 8px;
+
+      color: #ded4e5;
+      font-size: 14px;
+
+      background: transparent;
+      border: none;
+
+      text-align: left;
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .menu-item:hover {
+      background: #281633;
+      color: white;
+    }
+
+    .logout {
+      color: #c78cff;
+    }
+
+    /* ================================
+       HERO
+    ================================ */
+
+    .hero {
+      min-height: 520px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 80px 7%;
+
+      background:
+        radial-gradient(
+          circle at 70% 30%,
+          rgba(168, 85, 247, 0.18),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #55227a 0%,
+          #2b143c 45%,
+          #110a16 100%
+        );
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .welcome {
+      color: #d2aaff;
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 0.98;
+      margin: 0 0 24px;
+
+      letter-spacing: -3px;
+    }
+
+    .hero h1 span {
+      color: #b77aff;
+    }
+
+    .hero p {
+      max-width: 650px;
+
+      color: #d3c5dc;
+      font-size: 18px;
+      line-height: 1.7;
+
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 13px 22px;
+
+      border-radius: 9px;
+
+      font-weight: 700;
+      font-size: 14px;
+
+      transition: 0.2s;
+    }
+
+    .button-primary {
+      background: #8b4dcc;
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: #a55ee8;
+      transform: translateY(-1px);
+    }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0d0912;
-            color: white;
-        }
+    .button-secondary {
+      background: transparent;
+      border: 1px solid #5e3a70;
+      color: #e2d5e9;
+    }
 
-        /* NAVBAR */
+    .button-secondary:hover {
+      border-color: #a855f7;
+      background: rgba(168, 85, 247, 0.08);
+    }
 
-        nav {
-            height: 70px;
-            background: #150d1d;
-            border-bottom: 1px solid #30203a;
+    /* ================================
+       SECTION
+    ================================ */
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    section {
+      padding: 85px 7%;
+    }
 
-            padding: 0 7%;
+    .section-header {
+      margin-bottom: 42px;
+    }
 
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    .section-title {
+      font-size: 34px;
+      margin: 0 0 12px;
+    }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+    .section-description {
+      color: #a995b4;
+      max-width: 650px;
+      line-height: 1.7;
+    }
 
-        .logo span {
-            color: #a855f7;
-        }
+    /* ================================
+       COMMISSIONS
+    ================================ */
 
-        nav a {
-            color: #b9adbf;
-            text-decoration: none;
-            margin-left: 25px;
-            transition: 0.2s;
-        }
+    .commission-grid {
+      display: grid;
 
-        nav a:hover {
-            color: #b77aff;
-        }
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
+      gap: 20px;
+    }
 
-        /* HERO */
+    .commission-card {
+      background: #19111f;
 
-        .hero {
-            min-height: 560px;
+      border: 1px solid #32203d;
+      border-radius: 14px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+      padding: 28px;
 
-            text-align: center;
+      transition: 0.2s;
+    }
 
-            padding: 80px 20px;
+    .commission-card:hover {
+      border-color: #8b4dcc;
 
-            background:
-                radial-gradient(
-                    circle at center,
-                    #55227a 0%,
-                    #2b143c 35%,
-                    #110a16 75%
-                );
-        }
+      box-shadow:
+        0 12px 35px rgba(139, 77, 204, 0.15);
 
-        .hero-content {
-            max-width: 850px;
-        }
+      transform: translateY(-3px);
+    }
 
-        .hero h1 {
-            font-size: 72px;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
+    .commission-card h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+    }
 
-        .hero h1 span {
-            color: #b77aff;
-        }
+    .price {
+      color: #b77aff;
+      font-size: 27px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
 
-        .hero p {
-            color: #d1c6d8;
-            font-size: 19px;
-            line-height: 1.7;
-            margin-bottom: 35px;
-        }
+    .commission-card p {
+      color: #b9a9c2;
+      line-height: 1.65;
+      font-size: 14px;
+      min-height: 72px;
+    }
 
-        .button {
-            display: inline-block;
+    .card-button {
+      display: block;
 
-            padding: 15px 28px;
+      width: 100%;
 
-            background: #8b4dcc;
-            color: white;
+      text-align: center;
 
-            border-radius: 7px;
+      margin-top: 22px;
 
-            text-decoration: none;
-            font-weight: bold;
+      padding: 11px;
 
-            transition: 0.2s;
-        }
+      border-radius: 8px;
 
-        .button:hover {
-            background: #a55ee8;
-            transform: translateY(-2px);
-        }
+      background: #24152d;
+      border: 1px solid #432552;
 
+      color: #d8c4e2;
 
-        /* SECTIONS */
+      font-size: 14px;
+      font-weight: 700;
 
-        section {
-            padding: 90px 8%;
-        }
+      transition: 0.2s;
+    }
 
-        .section-title {
-            text-align: center;
-            font-size: 38px;
-            margin-bottom: 15px;
-        }
+    .card-button:hover {
+      background: #8b4dcc;
+      border-color: #8b4dcc;
+      color: white;
+    }
 
-        .section-title span {
-            color: #a855f7;
-        }
+    /* ================================
+       ABOUT
+    ================================ */
 
-        .section-description {
-            text-align: center;
-            color: #a99aad;
-            max-width: 700px;
-            margin: 0 auto 50px;
-            line-height: 1.7;
-        }
+    .mission {
+      background: #150d1d;
+    }
 
+    .mission-box {
+      max-width: 850px;
+    }
 
-        /* CARDS */
+    .mission-box h2 {
+      font-size: 34px;
+      margin-top: 0;
+    }
 
-        .cards {
-            display: grid;
+    .mission-box p {
+      color: #c3b5cb;
+      line-height: 1.8;
+      font-size: 16px;
+    }
 
-            grid-template-columns:
-                repeat(auto-fit, minmax(220px, 1fr));
+    /* ================================
+       FUTURE
+    ================================ */
 
-            gap: 25px;
+    .future-grid {
+      display: grid;
 
-            max-width: 1100px;
-            margin: auto;
-        }
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
-        .card {
-            background: #19111f;
+      gap: 20px;
+    }
 
-            border: 1px solid #32203d;
+    .future-card {
+      background: #19111f;
 
-            border-radius: 10px;
+      border: 1px solid #32203d;
+      border-top: 3px solid #a855f7;
 
-            padding: 30px;
+      border-radius: 12px;
 
-            transition: 0.25s;
-        }
+      padding: 24px;
+    }
 
-        .card:hover {
-            transform: translateY(-6px);
+    .future-card h3 {
+      margin-top: 0;
+    }
 
-            border-color: #8b4dcc;
+    .future-card p {
+      color: #a995b4;
+      line-height: 1.6;
+      font-size: 14px;
+    }
 
-            box-shadow:
-                0 10px 30px
-                rgba(168, 85, 247, 0.15);
-        }
+    /* ================================
+       FOOTER
+    ================================ */
 
-        .card-icon {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
+    footer {
+      background: #09060c;
 
-        .card h3 {
-            margin-bottom: 12px;
-            font-size: 21px;
-        }
+      border-top: 1px solid #211528;
 
-        .card p {
-            color: #a99aad;
-            line-height: 1.6;
-        }
+      padding: 35px 7%;
 
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-        /* MISSION */
+      gap: 20px;
 
-        .mission {
-            background: #150d1d;
+      color: #796b83;
+      font-size: 13px;
+    }
 
-            border-top: 1px solid #281832;
-            border-bottom: 1px solid #281832;
+    .footer-logo {
+      color: #a855f7;
+      font-weight: 800;
+    }
 
-            text-align: center;
-        }
+    /* ================================
+       MOBILE
+    ================================ */
 
-        .mission-box {
-            max-width: 850px;
-            margin: auto;
-        }
+    @media (max-width: 850px) {
+      nav {
+        padding: 0 5%;
+      }
 
-        .mission p {
-            color: #b9acbf;
-            font-size: 18px;
-            line-height: 1.8;
-        }
+      .nav-links {
+        display: none;
+      }
 
+      .commission-grid,
+      .future-grid {
+        grid-template-columns: 1fr;
+      }
 
-        /* FUTURE CARDS */
+      section {
+        padding: 65px 5%;
+      }
 
-        .future-card {
-            border-top: 3px solid #a855f7;
-        }
+      .hero {
+        padding: 70px 5%;
+      }
 
+      .hero h1 {
+        letter-spacing: -2px;
+      }
 
-        /* FOOTER */
+      .username {
+        display: none;
+      }
 
-        footer {
-            background: #09060c;
+      .arrow {
+        display: none;
+      }
 
-            text-align: center;
-
-            padding: 35px;
-
-            color: #716675;
-        }
-
-        footer strong {
-            color: white;
-        }
-
-
-        /* MOBILE */
-
-        @media (max-width: 600px) {
-
-            nav {
-                padding: 0 20px;
-            }
-
-            nav a {
-                margin-left: 10px;
-                font-size: 13px;
-            }
-
-            .logo {
-                font-size: 19px;
-            }
-
-            .hero h1 {
-                font-size: 50px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            section {
-                padding: 65px 6%;
-            }
-
-            .section-title {
-                font-size: 30px;
-            }
-        }
-
-    </style>
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- LOGIN CHECK -->
+  <!-- ================================
+       NAVBAR
+  ================================ -->
 
-<script>
-(async function () {
-    try {
-        const response = await fetch("/api/session", {
-            credentials: "include",
-            cache: "no-store"
-        });
+  <nav>
 
-        const session = await response.json();
+    <a href="/" class="logo">
+      Blemmished Studios
+    </a>
 
-        if (!session.loggedIn) {
-            window.location.replace("/login.html");
-        }
-    } catch (error) {
-        console.error("Session check failed:", error);
-        window.location.replace("/login.html");
-    }
-})();
-</script>
+    <div class="nav-links">
 
+      <a href="/" class="nav-link active">
+        Home
+      </a>
 
-<!-- NAVBAR -->
+      <a href="/commissions.html" class="nav-link">
+        Commissions
+      </a>
 
-<nav>
-
-    <div class="logo">
-        <span>Blemmished</span> Studios
     </div>
 
-    <div>
-        <a href="index.html">Home</a>
-        <a href="commissions.html">Commissions</a>
-        <a href="#">About</a>
+    <div class="user-area">
+
+      <button
+        class="user-button"
+        id="userButton"
+        type="button"
+      >
+
+        <img
+          id="navAvatar"
+          class="user-avatar"
+          src=""
+          alt="Profile picture"
+        >
+
+        <span
+          id="navUsername"
+          class="username"
+        >
+          Loading...
+        </span>
+
+        <span class="arrow">
+          ▼
+        </span>
+
+      </button>
+
+      <div
+        class="user-menu"
+        id="userMenu"
+      >
+
+        <div
+          class="menu-user"
+          id="menuUsername"
+        >
+          Loading...
+        </div>
+
+        <a
+          href="/profile.html"
+          class="menu-item"
+        >
+          Profile
+        </a>
+
+        <a
+          href="/commissions.html"
+          class="menu-item"
+        >
+          Commissions
+        </a>
+
+        <button
+          class="menu-item logout"
+          type="button"
+          id="logoutButton"
+        >
+          Log out
+        </button>
+
+      </div>
+
     </div>
 
-</nav>
+  </nav>
 
 
-<!-- HERO -->
+  <!-- ================================
+       HERO
+  ================================ -->
 
-<header class="hero">
+  <main>
 
-    <div class="hero-content">
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div
+          class="welcome"
+          id="welcomeText"
+        >
+          Welcome
+        </div>
 
         <h1>
-            <span>Welcome</span>
+          Minecraft
+          <span>development</span>
+          made simple.
         </h1>
 
         <p>
-            Welcome to Blemmished Studios — a place where
-            Minecraft servers can get unique plugins, add-ons,
-            and custom systems built around their ideas.
+          Welcome to Blemmished Studios — a place for
+          custom Minecraft plugins, mechanics, server
+          features, and other development projects.
         </p>
 
-        <a class="button" href="commissions.html">
+        <div class="hero-buttons">
+
+          <a
+            href="/commissions.html"
+            class="button button-primary"
+          >
             View Commissions
-        </a>
+          </a>
 
-    </div>
-
-</header>
-
-
-<!-- WHAT WE'RE BUILDING -->
-
-<section>
-
-    <h2 class="section-title">
-        What We're <span>Building</span>
-    </h2>
-
-    <p class="section-description">
-        Blemmished Studios is focused on creating unique
-        Minecraft plugins and add-ons designed to give
-        servers more possibilities and personality.
-    </p>
-
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="card-icon">⚙️</div>
-
-            <h3>Custom Plugins</h3>
-
-            <p>
-                Powerful plugins designed to add new mechanics,
-                commands, features, and systems to Minecraft servers.
-            </p>
+          <a
+            href="/profile.html"
+            class="button button-secondary"
+          >
+            View Profile
+          </a>
 
         </div>
 
+      </div>
 
-        <div class="card">
-
-            <div class="card-icon">✨</div>
-
-            <h3>Unique Ideas</h3>
-
-            <p>
-                We want to create plugins that help servers
-                stand out and offer players something different.
-            </p>
-
-        </div>
+    </section>
 
 
-        <div class="card">
+    <!-- ================================
+         COMMISSIONS
+    ================================ -->
 
-            <div class="card-icon">🛠️</div>
+    <section>
 
-            <h3>Server Tools</h3>
-
-            <p>
-                Useful tools and systems that make running
-                and managing a Minecraft server easier.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">🌎</div>
-
-            <h3>Built for Servers</h3>
-
-            <p>
-                Our goal is to create reliable features for
-                communities of all different sizes.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- MISSION -->
-
-<section class="mission">
-
-    <div class="mission-box">
+      <div class="section-header">
 
         <h2 class="section-title">
-            Our <span>Goal</span>
+          Commissions
+        </h2>
+
+        <p class="section-description">
+          Need something custom for your Minecraft
+          server or world? Choose a commission tier
+          and send in your request.
+        </p>
+
+      </div>
+
+      <div class="commission-grid">
+
+        <div class="commission-card">
+
+          <h3>
+            Small
+          </h3>
+
+          <div class="price">
+            $3–$10
+          </div>
+
+          <p>
+            Simple commands, messages, item mechanics,
+            chat formatting, vanilla mechanic changes,
+            and other small requests.
+          </p>
+
+          <a
+            href="/commissions.html#small"
+            class="card-button"
+          >
+            Request Commission
+          </a>
+
+        </div>
+
+
+        <div class="commission-card">
+
+          <h3>
+            Medium
+          </h3>
+
+          <div class="price">
+            $10–$30
+          </div>
+
+          <p>
+            Basic GUI menus, economy and shop systems,
+            scoreboards, kits, moderate configuration,
+            and custom server mechanics.
+          </p>
+
+          <a
+            href="/commissions.html#medium"
+            class="card-button"
+          >
+            Request Commission
+          </a>
+
+        </div>
+
+
+        <div class="commission-card">
+
+          <h3>
+            Large
+          </h3>
+
+          <div class="price">
+            $30–$75+
+          </div>
+
+          <p>
+            Custom minigames, larger mechanics,
+            Factions or Practice-style systems,
+            database features, and complex projects.
+          </p>
+
+          <a
+            href="/commissions.html#large"
+            class="card-button"
+          >
+            Request Commission
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================
+         MISSION
+    ================================ -->
+
+    <section class="mission">
+
+      <div class="mission-box">
+
+        <h2>
+          Built for Minecraft.
         </h2>
 
         <p>
-            Minecraft servers should be able to create their
-            own identity. Blemmished Studios aims to give server
-            owners the tools they need to build unique experiences
-            for their players.
+          Blemmished Studios focuses on creating custom
+          Minecraft features that fit the needs of your
+          server or world. Whether you need a small
+          mechanic or a larger custom system, every
+          commission is discussed and priced before work
+          begins.
         </p>
 
+      </div>
+
+    </section>
+
+
+    <!-- ================================
+         FUTURE
+    ================================ -->
+
+    <section>
+
+      <div class="section-header">
+
+        <h2 class="section-title">
+          More coming soon
+        </h2>
+
+        <p class="section-description">
+          The Studios website is still growing. More
+          features and services will be added over time.
+        </p>
+
+      </div>
+
+      <div class="future-grid">
+
+        <div class="future-card">
+
+          <h3>
+            Profiles
+          </h3>
+
+          <p>
+            Manage your Blemmished Studios profile and
+            account information.
+          </p>
+
+        </div>
+
+
+        <div class="future-card">
+
+          <h3>
+            Project tracking
+          </h3>
+
+          <p>
+            Keep track of commissions and project
+            progress in one place.
+          </p>
+
+        </div>
+
+
+        <div class="future-card">
+
+          <h3>
+            More services
+          </h3>
+
+          <p>
+            Additional Minecraft development services
+            may be added in the future.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================================
+       FOOTER
+  ================================ -->
+
+  <footer>
+
+    <div>
+      <span class="footer-logo">
+        Blemmished Studios
+      </span>
     </div>
 
-</section>
-
-
-<!-- WHAT'S COMING -->
-
-<section>
-
-    <h2 class="section-title">
-        What's <span>Coming</span>
-    </h2>
-
-    <p class="section-description">
-        We're still building. More plugins, features,
-        and services will be added to Blemmished Studios
-        over time.
-    </p>
-
-
-    <div class="cards">
-
-        <div class="card future-card">
-
-            <h3>Plugin Store</h3>
-
-            <p>
-                Browse plugins and add-ons created for
-                Minecraft servers.
-            </p>
-
-        </div>
-
-
-        <div class="card future-card">
-
-            <h3>Custom Commissions</h3>
-
-            <p>
-                Request a custom plugin designed specifically
-                for your server.
-            </p>
-
-        </div>
-
-
-        <div class="card future-card">
-
-            <h3>Downloads</h3>
-
-            <p>
-                Access your purchased plugins, updates,
-                and files through your account.
-            </p>
-
-        </div>
-
+    <div>
+      © 2026 Blemmished Studios
     </div>
 
-</section>
+  </footer>
 
 
-<!-- FOOTER -->
+  <!-- ================================
+       SCRIPT
+  ================================ -->
 
-<footer>
+  <script>
+    const userButton =
+      document.getElementById("userButton");
 
-    <p>
-        © 2026 <strong>Blemmished Studios</strong>.
-        All rights reserved.
-    </p>
+    const userMenu =
+      document.getElementById("userMenu");
 
-</footer>
+    const logoutButton =
+      document.getElementById("logoutButton");
+
+
+    userButton.addEventListener("click", () => {
+      userMenu.classList.toggle("show");
+    });
+
+
+    document.addEventListener("click", (event) => {
+
+      if (
+        !event.target.closest(".user-area")
+      ) {
+        userMenu.classList.remove("show");
+      }
+
+    });
+
+
+    logoutButton.addEventListener("click", () => {
+      window.location.href =
+        "/auth/logout";
+    });
+
+
+    async function loadUser() {
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/session",
+            {
+              credentials: "include",
+              cache: "no-store"
+            }
+          );
+
+        if (!response.ok) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+        }
+
+        const user =
+          await response.json();
+
+
+        if (!user.loggedIn) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+        }
+
+
+        const username =
+          user.username || "User";
+
+
+        document.getElementById(
+          "navUsername"
+        ).textContent = username;
+
+
+        document.getElementById(
+          "menuUsername"
+        ).textContent =
+          "Logged in as " + username;
+
+
+        document.getElementById(
+          "welcomeText"
+        ).textContent =
+          "Welcome " + username;
+
+
+        if (user.avatar) {
+
+          document.getElementById(
+            "navAvatar"
+          ).src = user.avatar;
+
+        } else {
+
+          // Discord default avatar fallback
+          const defaultAvatar =
+            Number(BigInt(user.id) % 6n);
+
+          document.getElementById(
+            "navAvatar"
+          ).src =
+            "https://cdn.discordapp.com/embed/avatars/" +
+            defaultAvatar +
+            ".png";
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Failed to load user:",
+          error
+        );
+
+      }
+
+    }
+
+
+    loadUser();
+  </script>
 
 </body>
 </html>
