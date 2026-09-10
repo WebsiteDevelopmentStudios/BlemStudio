@@ -57,7 +57,8 @@ function isProtectedPage(pathname) {
   return (
     pathname === "/" ||
     pathname === "/index.html" ||
-    pathname === "/commissions.html"
+    pathname === "/commissions.html" ||
+    pathname === "/profile.html"
   );
 }
 
@@ -199,17 +200,27 @@ async function handleDiscordCallback(request, env) {
 
   const user = await userResponse.json();
 
-  // IMPORTANT:
-  // username = actual Discord username
-  // global_name = display name
-const session = {
-  id: user.id,
-  username: user.username,
-  avatar: user.avatar,
-  expires:
-    Date.now() +
-    SESSION_MAX_AGE * 1000
-};
+
+  // ================================
+  // CREATE SESSION
+  // ================================
+
+  const session = {
+    id: user.id,
+    username: user.username,
+
+    // Discord gives us an avatar HASH.
+    // Convert it into the real Discord CDN URL.
+    avatar: user.avatar
+      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith("a_") ? "gif" : "png"}?size=256`
+      : null,
+
+    expires:
+      Date.now() +
+      SESSION_MAX_AGE * 1000
+  };
+
+
   const payload = base64urlEncode(
     JSON.stringify(session)
   );
@@ -267,6 +278,7 @@ async function getSession(request, env) {
         headers: {
           "Content-Type":
             "application/json",
+
           "Cache-Control":
             "no-store"
         }
@@ -278,13 +290,16 @@ async function getSession(request, env) {
     JSON.stringify({
       loggedIn: true,
       id: session.id,
-      username: session.username
+      username: session.username,
+      avatar: session.avatar || null
     }),
     {
       status: 200,
+
       headers: {
         "Content-Type":
           "application/json",
+
         "Cache-Control":
           "no-store"
       }
@@ -362,6 +377,7 @@ async function getValidSession(request, env) {
 function logout() {
   const response = new Response(null, {
     status: 302,
+
     headers: {
       "Location": "/login.html"
     }
@@ -401,12 +417,16 @@ async function sign(value, secret) {
   const key =
     await crypto.subtle.importKey(
       "raw",
+
       new TextEncoder().encode(secret),
+
       {
         name: "HMAC",
         hash: "SHA-256"
       },
+
       false,
+
       ["sign"]
     );
 
@@ -432,19 +452,25 @@ async function verify(
     const key =
       await crypto.subtle.importKey(
         "raw",
+
         new TextEncoder().encode(secret),
+
         {
           name: "HMAC",
           hash: "SHA-256"
         },
+
         false,
+
         ["verify"]
       );
 
     return await crypto.subtle.verify(
       "HMAC",
       key,
+
       base64urlToBytes(signature),
+
       new TextEncoder().encode(value)
     );
 
@@ -499,6 +525,7 @@ function base64urlToBytes(value) {
 
   return Uint8Array.from(
     binary,
+
     char => char.charCodeAt(0)
   );
 }
@@ -556,29 +583,45 @@ function escapeHTML(value) {
 function errorPage(message) {
   return new Response(
     `<!DOCTYPE html>
+
 <html>
+
 <head>
-<title>Blemmished Studios - Login Error</title>
+
+<title>
+Blemmished Studios - Login Error
+</title>
 
 <style>
+
 body {
   background: #0d0912;
   color: white;
   font-family: Arial, sans-serif;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   min-height: 100vh;
+
   margin: 0;
+
   padding: 20px;
 }
 
 .box {
   background: #19111f;
+
   border: 1px solid #32203d;
+
   border-radius: 16px;
+
   padding: 35px;
+
   max-width: 500px;
+
   text-align: center;
 }
 
@@ -588,32 +631,47 @@ h1 {
 
 p {
   color: #c8b9d2;
+
   line-height: 1.6;
 }
 
 a {
   color: #b77aff;
 }
+
 </style>
+
 </head>
 
 <body>
-<div class="box">
-<h1>Login Error</h1>
 
-<p>${message}</p>
+<div class="box">
+
+<h1>
+Login Error
+</h1>
 
 <p>
+${message}
+</p>
+
+<p>
+
 <a href="/login.html">
 Return to login
 </a>
+
 </p>
 
 </div>
+
 </body>
+
 </html>`,
+
     {
       status: 400,
+
       headers: {
         "Content-Type":
           "text/html; charset=UTF-8"
