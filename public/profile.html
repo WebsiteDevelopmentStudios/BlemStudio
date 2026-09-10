@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Profile | Blemmished Studios</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+
+      background: #0d0912;
+
+      color: white;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* ================================
+       NAVBAR
+    ================================ */
+
+    nav {
+      height: 72px;
+
+      background: #150d1d;
+
+      border-bottom:
+        1px solid #291832;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding: 0 7%;
+    }
+
+    .logo {
+      font-size: 22px;
+
+      font-weight: 800;
+
+      color: #a855f7;
+    }
+
+    .back-button {
+      padding:
+        10px 17px;
+
+      border-radius: 8px;
+
+      border:
+        1px solid #432552;
+
+      background: #19111f;
+
+      color: #d8c4e2;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      transition: 0.2s;
+    }
+
+    .back-button:hover {
+      background: #8b4dcc;
+
+      border-color: #8b4dcc;
+
+      color: white;
+    }
+
+
+    /* ================================
+       PAGE
+    ================================ */
+
+    .page {
+      width: 100%;
+
+      max-width: 1050px;
+
+      margin: 0 auto;
+
+      padding:
+        65px 25px 100px;
+    }
+
+    .page-header {
+      margin-bottom: 35px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 10px;
+
+      font-size: 40px;
+
+      letter-spacing: -1px;
+    }
+
+    .page-header p {
+      margin: 0;
+
+      color: #a995b4;
+
+      line-height: 1.6;
+    }
+
+
+    /* ================================
+       PROFILE CARD
+    ================================ */
+
+    .profile-card {
+      background: #19111f;
+
+      border:
+        1px solid #32203d;
+
+      border-radius: 16px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 15px 45px
+        rgba(0, 0, 0, 0.25);
+    }
+
+    .profile-banner {
+      height: 150px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #55227a,
+          #2b143c,
+          #110a16
+        );
+
+      position: relative;
+    }
+
+    .profile-content {
+      padding:
+        0 35px 35px;
+    }
+
+
+    /* ================================
+       AVATAR
+    ================================ */
+
+    .avatar-container {
+      margin-top: -55px;
+
+      position: relative;
+
+      width: 110px;
+
+      height: 110px;
+    }
+
+    .avatar {
+      width: 110px;
+
+      height: 110px;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      background: #32203d;
+
+      border:
+        6px solid #19111f;
+
+      display: block;
+    }
+
+    .online-dot {
+      position: absolute;
+
+      right: 4px;
+
+      bottom: 5px;
+
+      width: 24px;
+
+      height: 24px;
+
+      background: #8b4dcc;
+
+      border:
+        4px solid #19111f;
+
+      border-radius: 50%;
+    }
+
+
+    /* ================================
+       USER INFO
+    ================================ */
+
+    .user-info {
+      margin-top: 18px;
+    }
+
+    .username {
+      margin: 0;
+
+      font-size: 30px;
+
+      font-weight: 800;
+    }
+
+    .username-label {
+      margin-top: 6px;
+
+      color: #a995b4;
+
+      font-size: 14px;
+    }
+
+
+    /* ================================
+       DETAILS
+    ================================ */
+
+    .details {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 15px;
+
+      margin-top: 30px;
+    }
+
+    .detail {
+      background: #150d1d;
+
+      border:
+        1px solid #32203d;
+
+      border-radius: 10px;
+
+      padding: 18px;
+    }
+
+    .detail-label {
+      color: #8f7e99;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.5px;
+
+      margin-bottom: 7px;
+    }
+
+    .detail-value {
+      color: #e5dce9;
+
+      font-size: 15px;
+
+      font-weight: 600;
+
+      word-break: break-word;
+    }
+
+
+    /* ================================
+       ACTIONS
+    ================================ */
+
+    .actions {
+      display: flex;
+
+      gap: 12px;
+
+      margin-top: 30px;
+
+      flex-wrap: wrap;
+    }
+
+    .action {
+      padding:
+        12px 20px;
+
+      border-radius: 8px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      transition: 0.2s;
+    }
+
+    .home-button {
+      background: #8b4dcc;
+
+      color: white;
+    }
+
+    .home-button:hover {
+      background: #a55ee8;
+    }
+
+    .logout-button {
+      background: transparent;
+
+      border:
+        1px solid #432552;
+
+      color: #cdbbd6;
+
+      cursor: pointer;
+    }
+
+    .logout-button:hover {
+      background: #281633;
+
+      border-color: #8b4dcc;
+
+      color: white;
+    }
+
+
+    /* ================================
+       COMING SOON
+    ================================ */
+
+    .coming-soon {
+      margin-top: 25px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 15px;
+    }
+
+    .future-card {
+      background: #19111f;
+
+      border:
+        1px solid #32203d;
+
+      border-top:
+        3px solid #a855f7;
+
+      border-radius: 12px;
+
+      padding: 24px;
+    }
+
+    .future-card h3 {
+      margin:
+        0 0 8px;
+    }
+
+    .future-card p {
+      margin: 0;
+
+      color: #a995b4;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+    }
+
+
+    /* ================================
+       LOADING
+    ================================ */
+
+    .loading {
+      min-height: 60vh;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #a995b4;
+
+      font-size: 16px;
+    }
+
+
+    /* ================================
+       FOOTER
+    ================================ */
+
+    footer {
+      background: #09060c;
+
+      border-top:
+        1px solid #211528;
+
+      padding:
+        30px 7%;
+
+      text-align: center;
+
+      color: #796b83;
+
+      font-size: 13px;
+    }
+
+    .footer-logo {
+      color: #a855f7;
+
+      font-weight: 800;
+    }
+
+
+    /* ================================
+       MOBILE
+    ================================ */
+
+    @media (max-width: 700px) {
+
+      nav {
+        padding: 0 5%;
+      }
+
+      .page {
+        padding:
+          45px 18px 70px;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .coming-soon {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-content {
+        padding:
+          0 22px 25px;
+      }
+
+      .username {
+        font-size: 25px;
+      }
+
+      .profile-banner {
+        height: 120px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ================================
+       NAVBAR
+  ================================ -->
+
+  <nav>
+
+    <a
+      href="/"
+      class="logo"
+    >
+      Blemmished Studios
+    </a>
+
+    <a
+      href="/"
+      class="back-button"
+    >
+      Back to Home
+    </a>
+
+  </nav>
+
+
+  <!-- ================================
+       CONTENT
+  ================================ -->
+
+  <div id="loading" class="loading">
+
+    Loading profile...
+
+  </div>
+
+
+  <main
+    class="page"
+    id="profilePage"
+    style="display: none;"
+  >
+
+
+    <div class="page-header">
+
+      <h1>
+        Profile
+      </h1>
+
+      <p>
+        Your Blemmished Studios account.
+      </p>
+
+    </div>
+
+
+    <!-- ================================
+         PROFILE
+    ================================ -->
+
+    <div class="profile-card">
+
+
+      <div class="profile-banner"></div>
+
+
+      <div class="profile-content">
+
+
+        <div class="avatar-container">
+
+          <img
+            id="profileAvatar"
+            class="avatar"
+            src=""
+            alt="Discord profile picture"
+          >
+
+          <div class="online-dot"></div>
+
+        </div>
+
+
+        <div class="user-info">
+
+          <h2
+            id="profileUsername"
+            class="username"
+          >
+            Loading...
+          </h2>
+
+          <div class="username-label">
+            Discord username
+          </div>
+
+        </div>
+
+
+        <!-- ================================
+             DETAILS
+        ================================ -->
+
+        <div class="details">
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Username
+            </div>
+
+            <div
+              id="detailUsername"
+              class="detail-value"
+            >
+              Loading...
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Discord User ID
+            </div>
+
+            <div
+              id="detailId"
+              class="detail-value"
+            >
+              Loading...
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Account
+            </div>
+
+            <div class="detail-value">
+              Discord connected
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Status
+            </div>
+
+            <div class="detail-value">
+              Logged in
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- ================================
+             ACTIONS
+        ================================ -->
+
+        <div class="actions">
+
+          <a
+            href="/"
+            class="action home-button"
+          >
+            Back to Home
+          </a>
+
+          <button
+            id="logoutButton"
+            class="action logout-button"
+            type="button"
+          >
+            Log out
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================
+         FUTURE FEATURES
+    ================================ -->
+
+    <div class="coming-soon">
+
+
+      <div class="future-card">
+
+        <h3>
+          Commission History
+        </h3>
+
+        <p>
+          Your previous and active commissions
+          will appear here in the future.
+        </p>
+
+      </div>
+
+
+      <div class="future-card">
+
+        <h3>
+          Profile Settings
+        </h3>
+
+        <p>
+          More profile customization options
+          will be available here later.
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+  </main>
+
+
+  <!-- ================================
+       FOOTER
+  ================================ -->
+
+  <footer>
+
+    <span class="footer-logo">
+      Blemmished Studios
+    </span>
+
+    <br><br>
+
+    © 2026 Blemmished Studios
+
+  </footer>
+
+
+  <!-- ================================
+       SCRIPT
+  ================================ -->
+
+  <script>
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+    const profilePage =
+      document.getElementById(
+        "profilePage"
+      );
+
+
+    async function loadProfile() {
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/session",
+            {
+              credentials: "include",
+              cache: "no-store"
+            }
+          );
+
+
+        if (!response.ok) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+        }
+
+
+        const user =
+          await response.json();
+
+
+        if (!user.loggedIn) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+        }
+
+
+        const username =
+          user.username || "User";
+
+
+        /* ================================
+           USERNAME
+        ================================ */
+
+        document.getElementById(
+          "profileUsername"
+        ).textContent =
+          username;
+
+
+        document.getElementById(
+          "detailUsername"
+        ).textContent =
+          username;
+
+
+        /* ================================
+           DISCORD ID
+        ================================ */
+
+        document.getElementById(
+          "detailId"
+        ).textContent =
+          user.id || "Unavailable";
+
+
+        /* ================================
+           AVATAR
+        ================================ */
+
+        const avatar =
+          document.getElementById(
+            "profileAvatar"
+          );
+
+
+        if (user.avatar) {
+
+          avatar.src =
+            user.avatar;
+
+        } else {
+
+          let defaultAvatar = 0;
+
+          try {
+
+            defaultAvatar =
+              Number(
+                BigInt(user.id) % 6n
+              );
+
+          } catch {
+
+            defaultAvatar = 0;
+
+          }
+
+
+          avatar.src =
+            "https://cdn.discordapp.com/embed/avatars/" +
+            defaultAvatar +
+            ".png";
+
+        }
+
+
+        /* ================================
+           SHOW PAGE
+        ================================ */
+
+        loading.style.display =
+          "none";
+
+        profilePage.style.display =
+          "block";
+
+
+      } catch (error) {
+
+        console.error(
+          "Profile loading failed:",
+          error
+        );
+
+        loading.textContent =
+          "Unable to load your profile.";
+
+      }
+
+    }
+
+
+    /* ================================
+       LOGOUT
+    ================================ */
+
+    document
+      .getElementById(
+        "logoutButton"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          window.location.href =
+            "/auth/logout";
+
+        }
+      );
+
+
+    loadProfile();
+
+  </script>
+
+
+</body>
+
+</html>
