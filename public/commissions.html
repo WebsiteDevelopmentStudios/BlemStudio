@@ -270,7 +270,7 @@
     }
 
     /* =========================
-       JAVA / BEDROCK SELECTION
+       EDITION
     ========================= */
 
     .edition-grid {
@@ -864,22 +864,25 @@
 
 
     <!-- =========================
-         EDITION
+         COMMISSION OPTIONS
     ========================= -->
 
     <section class="section">
 
       <h2>
-        Choose Your Edition
+        Commission Options
       </h2>
 
       <p class="section-description">
-        Select the Minecraft edition your project
-        is being made for. Bedrock commissions have
-        an additional $2 charge because they require
-        additional work.
+        Start by selecting your Minecraft edition,
+        then choose the commission size that best
+        matches your project.
       </p>
 
+
+      <!-- =========================
+           EDITION
+      ========================= -->
 
       <div class="edition-grid">
 
@@ -1256,9 +1259,9 @@
       </h2>
 
       <p class="section-description">
-        Fill out the information below. I'll review
-        your request and give you a price before
-        beginning.
+        Fill out the information below. Your Discord
+        information is automatically attached to your
+        request.
       </p>
 
 
@@ -1268,64 +1271,27 @@
         method="POST"
       >
 
+
+        <!-- =========================
+             HIDDEN DISCORD INFORMATION
+        ========================= -->
+
+        <input
+          type="hidden"
+          id="discordUsername"
+          name="discord_username"
+          value=""
+        >
+
+        <input
+          type="hidden"
+          id="discordId"
+          name="discord_id"
+          value=""
+        >
+
+
         <div class="form-grid">
-
-
-          <!-- NAME -->
-
-          <div class="form-group">
-
-            <label for="name">
-              Name
-            </label>
-
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your name"
-              required
-            >
-
-          </div>
-
-
-          <!-- EMAIL -->
-
-          <div class="form-group">
-
-            <label for="email">
-              Email
-            </label>
-
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="you@example.com"
-              required
-            >
-
-          </div>
-
-
-          <!-- DISCORD -->
-
-          <div class="form-group">
-
-            <label for="discord">
-              Discord Username
-            </label>
-
-            <input
-              type="text"
-              id="discord"
-              name="discord"
-              placeholder="Your Discord username"
-              required
-            >
-
-          </div>
 
 
           <!-- MINECRAFT VERSION -->
@@ -1334,6 +1300,7 @@
 
             <label for="minecraft_version">
               Minecraft Version
+              <span class="required">*</span>
             </label>
 
             <select
@@ -1409,7 +1376,7 @@
 
           <!-- SERVER SOFTWARE -->
 
-          <div class="form-group full">
+          <div class="form-group">
 
             <label for="server_software">
               Server Software
@@ -1623,7 +1590,7 @@
 
 
     /* =========================
-       LOAD PROFILE
+       LOAD DISCORD PROFILE
     ========================= */
 
     async function loadProfile() {
@@ -1647,11 +1614,19 @@
         }
 
 
+        /* =========================
+           DISPLAY USERNAME
+        ========================= */
+
         document.getElementById(
           "navUsername"
         ).textContent =
           user.username;
 
+
+        /* =========================
+           AVATAR
+        ========================= */
 
         const avatar =
           document.getElementById(
@@ -1670,6 +1645,23 @@
             `https://cdn.discordapp.com/embed/avatars/${Number(user.id) % 5}.png`;
 
         }
+
+
+        /* =========================
+           HIDDEN DISCORD DATA
+        ========================= */
+
+        document.getElementById(
+          "discordUsername"
+        ).value =
+          user.username;
+
+
+        document.getElementById(
+          "discordId"
+        ).value =
+          user.id;
+
 
       } catch (error) {
 
