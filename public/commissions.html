@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Commissions | Blemm Studios</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+
+      background: #0d0912;
+
+      color: white;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* ================================
+       NAVBAR
+    ================================ */
+
+    nav {
+      height: 72px;
+
+      background: #150d1d;
+
+      border-bottom:
+        1px solid #291832;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding: 0 7%;
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 22px;
+
+      font-weight: 800;
+
+      color: #a855f7;
+    }
+
+    .nav-right {
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+    }
+
+    .home-button {
+      padding:
+        10px 17px;
+
+      border-radius: 8px;
+
+      border:
+        1px solid #432552;
+
+      background: #19111f;
+
+      color: #d8c4e2;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      transition: 0.2s;
+    }
+
+    .home-button:hover {
+      background: #8b4dcc;
+
+      border-color: #8b4dcc;
+
+      color: white;
+    }
+
+
+    /* ================================
+       PAGE
+    ================================ */
+
+    .page {
+      width: 100%;
+
+      max-width: 1100px;
+
+      margin: 0 auto;
+
+      padding:
+        65px 25px 100px;
+    }
+
+
+    .page-header {
+      text-align: center;
+
+      margin-bottom: 45px;
+    }
+
+    .page-header h1 {
+      margin:
+        0 0 12px;
+
+      font-size: 42px;
+
+      letter-spacing: -1px;
+    }
+
+    .page-header h1 span {
+      color: #a855f7;
+    }
+
+    .page-header p {
+      max-width: 650px;
+
+      margin: 0 auto;
+
+      color: #a995b4;
+
+      line-height: 1.7;
+
+      font-size: 16px;
+    }
+
+
+    /* ================================
+       SERVICES
+    ================================ */
+
+    .services {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 18px;
+
+      margin-bottom: 45px;
+    }
+
+    .service-card {
+      background: #19111f;
+
+      border:
+        1px solid #32203d;
+
+      border-radius: 14px;
+
+      padding: 25px;
+
+      transition: 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+
+      border-color: #7540a5;
+    }
+
+    .service-icon {
+      width: 45px;
+
+      height: 45px;
+
+      border-radius: 10px;
+
+      background: #281633;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #b77aff;
+
+      font-size: 20px;
+
+      font-weight: 800;
+
+      margin-bottom: 17px;
+    }
+
+    .service-card h3 {
+      margin:
+        0 0 8px;
+
+      font-size: 18px;
+    }
+
+    .service-card p {
+      margin: 0;
+
+      color: #9e8ba8;
+
+      line-height: 1.6;
+
+      font-size: 14px;
+    }
+
+
+    /* ================================
+       FORM AREA
+    ================================ */
+
+    .form-wrapper {
+      background: #19111f;
+
+      border:
+        1px solid #32203d;
+
+      border-radius: 16px;
+
+      padding: 35px;
+
+      box-shadow:
+        0 15px 45px
+        rgba(0, 0, 0, 0.25);
+    }
+
+    .form-header {
+      margin-bottom: 30px;
+    }
+
+    .form-header h2 {
+      margin:
+        0 0 8px;
+
+      font-size: 27px;
+    }
+
+    .form-header p {
+      margin: 0;
+
+      color: #a995b4;
+
+      line-height: 1.6;
+
+      font-size: 14px;
+    }
+
+
+    /* ================================
+       FORM
+    ================================ */
+
+    form {
+      display: grid;
+
+      gap: 20px;
+    }
+
+    .form-row {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 8px;
+    }
+
+    .field label {
+      color: #d9cbe0;
+
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+    .required {
+      color: #a855f7;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+
+      border:
+        1px solid #3a2844;
+
+      border-radius: 9px;
+
+      background: #110a16;
+
+      color: white;
+
+      padding:
+        13px 14px;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size: 14px;
+
+      outline: none;
+
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #8b4dcc;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(168, 85, 247, 0.10);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #67586e;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    textarea {
+      min-height: 150px;
+
+      resize: vertical;
+
+      line-height: 1.6;
+    }
+
+
+    /* ================================
+       CHECKBOX
+    ================================ */
+
+    .checkbox {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 10px;
+
+      padding-top: 2px;
+    }
+
+    .checkbox input {
+      width: 17px;
+
+      height: 17px;
+
+      margin-top: 2px;
+
+      accent-color: #a855f7;
+
+      flex-shrink: 0;
+    }
+
+    .checkbox label {
+      color: #9e8ba8;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+      cursor: pointer;
+    }
+
+
+    /* ================================
+       SUBMIT
+    ================================ */
+
+    .submit-button {
+      width: 100%;
+
+      border: none;
+
+      border-radius: 9px;
+
+      padding:
+        14px 20px;
+
+      background: #8b4dcc;
+
+      color: white;
+
+      font-size: 15px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .submit-button:hover {
+      background: #a55ee8;
+
+      transform: translateY(-1px);
+    }
+
+
+    /* ================================
+       NOTICE
+    ================================ */
+
+    .notice {
+      margin-top: 25px;
+
+      padding: 17px;
+
+      background: #150d1d;
+
+      border:
+        1px solid #32203d;
+
+      border-radius: 10px;
+
+      color: #93809d;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+      text-align: center;
+    }
+
+
+    /* ================================
+       FOOTER
+    ================================ */
+
+    footer {
+      background: #09060c;
+
+      border-top:
+        1px solid #211528;
+
+      padding:
+        30px 7%;
+
+      text-align: center;
+
+      color: #796b83;
+
+      font-size: 13px;
+    }
+
+    .footer-logo {
+      color: #a855f7;
+
+      font-weight: 800;
+    }
+
+
+    /* ================================
+       MOBILE
+    ================================ */
+
+    @media (max-width: 800px) {
+
+      nav {
+        padding: 0 5%;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .page {
+        padding:
+          45px 18px 70px;
+      }
+
+      .page-header h1 {
+        font-size: 34px;
+      }
+
+      .form-wrapper {
+        padding: 23px;
+      }
+
+      .logo {
+        font-size: 19px;
+      }
+
+      .home-button {
+        padding:
+          9px 13px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ================================
+       NAVBAR
+  ================================ -->
+
+  <nav>
+
+    <a
+      href="/"
+      class="logo"
+    >
+      Blemm Studios
+    </a>
+
+
+    <div class="nav-right">
+
+      <a
+        href="/"
+        class="home-button"
+      >
+        Back to Home
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- ================================
+       PAGE
+  ================================ -->
+
+  <main class="page">
+
+
+    <section class="page-header">
+
+      <h1>
+        Start a <span>Commission</span>
+      </h1>
+
+      <p>
+        Looking for a custom Minecraft plugin or
+        server solution? Tell us what you're looking
+        for and we'll get back to you with the next
+        steps.
+      </p>
+
+    </section>
+
+
+    <!-- ================================
+         SERVICES
+    ================================ -->
+
+    <section class="services">
+
+
+      <div class="service-card">
+
+        <div class="service-icon">
+          P
+        </div>
+
+        <h3>
+          Custom Plugins
+        </h3>
+
+        <p>
+          Custom Minecraft plugins built around
+          your server's exact needs.
+        </p>
+
+      </div>
+
+
+      <div class="service-card">
+
+        <div class="service-icon">
+          S
+        </div>
+
+        <h3>
+          Server Systems
+        </h3>
+
+        <p>
+          Large-scale systems and features designed
+          to work together on your server.
+        </p>
+
+      </div>
+
+
+      <div class="service-card">
+
+        <div class="service-icon">
+          C
+        </div>
+
+        <h3>
+          Custom Features
+        </h3>
+
+        <p>
+          Unique mechanics, commands, GUIs,
+          integrations, and other custom features.
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- ================================
+         COMMISSION FORM
+    ================================ -->
+
+    <section class="form-wrapper">
+
+
+      <div class="form-header">
+
+        <h2>
+          Commission Request
+        </h2>
+
+        <p>
+          Fill out as much information as you can.
+          The more details you provide, the easier
+          it is for us to understand your project.
+        </p>
+
+      </div>
+
+
+      <form
+        action="https://formspree.io/f/mjyvjewv"
+        method="POST"
+      >
+
+
+        <!-- NAME + EMAIL -->
+
+        <div class="form-row">
+
+
+          <div class="field">
+
+            <label for="name">
+              Name
+              <span class="required">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your name"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="email">
+              Email
+              <span class="required">*</span>
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <!-- DISCORD + SERVER -->
+
+        <div class="form-row">
+
+
+          <div class="field">
+
+            <label for="discord">
+              Discord Username
+              <span class="required">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="discord"
+              name="discord"
+              placeholder="yourusername"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="server">
+              Server Name
+            </label>
+
+            <input
+              type="text"
+              id="server"
+              name="server"
+              placeholder="Your Minecraft server"
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <!-- COMMISSION TYPE + BUDGET -->
+
+        <div class="form-row">
+
+
+          <div class="field">
+
+            <label for="type">
+              Commission Type
+              <span class="required">*</span>
+            </label>
+
+            <select
+              id="type"
+              name="commission_type"
+              required
+            >
+
+              <option value="">
+                Select a type
+              </option>
+
+              <option value="Custom Plugin">
+                Custom Plugin
+              </option>
+
+              <option value="Server System">
+                Server System
+              </option>
+
+              <option value="Custom Feature">
+                Custom Feature
+              </option>
+
+              <option value="Plugin Fix">
+                Plugin Fix
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="budget">
+              Budget
+            </label>
+
+            <select
+              id="budget"
+              name="budget"
+            >
+
+              <option value="">
+                Select a budget
+              </option>
+
+              <option value="Under $25">
+                Under $25
+              </option>
+
+              <option value="$25 - $50">
+                $25 - $50
+              </option>
+
+              <option value="$50 - $100">
+                $50 - $100
+              </option>
+
+              <option value="$100 - $250">
+                $100 - $250
+              </option>
+
+              <option value="$250+">
+                $250+
+              </option>
+
+              <option value="Not sure yet">
+                Not sure yet
+              </option>
+
+            </select>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="field">
+
+          <label for="description">
+            Project Description
+            <span class="required">*</span>
+          </label>
+
+          <textarea
+            id="description"
+            name="project_description"
+            placeholder="Tell us what you want built, how it should work, commands you need, examples of similar plugins, etc."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <!-- VERSION -->
+
+        <div class="form-row">
+
+
+          <div class="field">
+
+            <label for="version">
+              Minecraft Version
+            </label>
+
+            <input
+              type="text"
+              id="version"
+              name="minecraft_version"
+              placeholder="Example: 1.21.8"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="platform">
+              Server Platform
+            </label>
+
+            <select
+              id="platform"
+              name="server_platform"
+            >
+
+              <option value="">
+                Select platform
+              </option>
+
+              <option value="Paper">
+                Paper
+              </option>
+
+              <option value="Spigot">
+                Spigot
+              </option>
+
+              <option value="Purpur">
+                Purpur
+              </option>
+
+              <option value="Folia">
+                Folia
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+              <option value="Not sure">
+                Not sure
+              </option>
+
+            </select>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- DEADLINE -->
+
+        <div class="field">
+
+          <label for="deadline">
+            Desired Deadline
+          </label>
+
+          <input
+            type="text"
+            id="deadline"
+            name="deadline"
+            placeholder="Example: Within 2 weeks"
+          >
+
+        </div>
+
+
+        <!-- EXTRA INFORMATION -->
+
+        <div class="field">
+
+          <label for="extra">
+            Additional Information
+          </label>
+
+          <textarea
+            id="extra"
+            name="additional_information"
+            placeholder="Anything else we should know?"
+          ></textarea>
+
+        </div>
+
+
+        <!-- AGREEMENT -->
+
+        <div class="checkbox">
+
+          <input
+            type="checkbox"
+            id="contact"
+            name="contact_permission"
+            value="yes"
+            required
+          >
+
+          <label for="contact">
+            I understand that submitting this form
+            sends my commission request to Blemm Studios
+            and allows the team to contact me regarding
+            this request.
+          </label>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <button
+          type="submit"
+          class="submit-button"
+        >
+          Submit Commission Request
+        </button>
+
+
+      </form>
+
+
+      <div class="notice">
+
+        Please provide as much detail as possible.
+        Commission requests with clear requirements
+        are easier for us to review and estimate.
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+  <!-- ================================
+       FOOTER
+  ================================ -->
+
+  <footer>
+
+    <span class="footer-logo">
+      Blemm Studios
+    </span>
+
+    <br><br>
+
+    © 2026 Blemm Studios
+
+  </footer>
+
+
+</body>
+
+</html>
