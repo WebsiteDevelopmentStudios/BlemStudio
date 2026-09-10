@@ -202,14 +202,14 @@ async function handleDiscordCallback(request, env) {
   // IMPORTANT:
   // username = actual Discord username
   // global_name = display name
-  const session = {
-    id: user.id,
-    username: user.username,
-    expires:
-      Date.now() +
-      SESSION_MAX_AGE * 1000
-  };
-
+const session = {
+  id: user.id,
+  username: user.username,
+  avatar: user.avatar,
+  expires:
+    Date.now() +
+    SESSION_MAX_AGE * 1000
+};
   const payload = base64urlEncode(
     JSON.stringify(session)
   );
