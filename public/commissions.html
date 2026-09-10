@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Commissions | Blemm Studios</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Commissions | Blemm Studios
+  </title>
+
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
     body {
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       background:
-        radial-gradient(circle at top, #2b1452 0%, #140b22 45%, #0d0716 100%);
+        radial-gradient(
+          circle at top,
+          #2b1452 0%,
+          #140b22 45%,
+          #0d0716 100%
+        );
+
       color: white;
       min-height: 100vh;
+
     }
+
 
     /* =========================
        NAVBAR
     ========================= */
 
     nav {
+
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -36,108 +61,167 @@
 
       padding: 16px 35px;
 
-      background: rgba(15, 8, 25, 0.94);
-      backdrop-filter: blur(12px);
+      background:
+        rgba(15, 8, 25, 0.94);
 
-      border-bottom: 1px solid rgba(139, 92, 246, 0.25);
+      backdrop-filter:
+        blur(12px);
+
+      border-bottom:
+        1px solid rgba(139, 92, 246, 0.25);
+
     }
+
 
     .logo {
+
       color: white;
       text-decoration: none;
+
       font-size: 22px;
       font-weight: 800;
+
     }
+
 
     .logo span {
+
       color: #a78bfa;
+
     }
+
 
     .nav-right {
+
       display: flex;
       align-items: center;
+
       gap: 15px;
+
     }
+
 
     .back-home {
+
       color: #c4b5fd;
       text-decoration: none;
+
       font-weight: 600;
+
       transition: 0.2s;
+
     }
 
+
     .back-home:hover {
+
       color: white;
+
     }
+
 
     /* =========================
        PROFILE
     ========================= */
 
     .profile-wrapper {
+
       position: relative;
+
     }
 
+
     .profile-button {
+
       display: flex;
       align-items: center;
+
       gap: 9px;
 
       background: #24153d;
-      border: 1px solid #4c2b72;
+
+      border:
+        1px solid #4c2b72;
 
       color: white;
 
-      padding: 7px 12px 7px 7px;
+      padding:
+        7px 12px 7px 7px;
 
       border-radius: 12px;
 
       cursor: pointer;
+
       font-size: 14px;
 
       transition: 0.2s;
+
     }
+
 
     .profile-button:hover {
+
       background: #301b4f;
+
       border-color: #7045a5;
+
     }
 
+
     .profile-button img {
+
       width: 34px;
       height: 34px;
 
       border-radius: 50%;
+
       object-fit: cover;
 
       background: #35204f;
+
     }
 
+
     #navUsername {
+
       max-width: 140px;
 
       overflow: hidden;
+
       text-overflow: ellipsis;
+
       white-space: nowrap;
+
     }
+
 
     .arrow {
+
       font-size: 9px;
+
       color: #a78bfa;
+
     }
 
+
     .profile-menu {
+
       display: none;
 
       position: absolute;
+
       right: 0;
-      top: calc(100% + 8px);
+
+      top:
+        calc(100% + 8px);
 
       width: 150px;
 
       background: #1b102d;
 
-      border: 1px solid #4c2b72;
+      border:
+        1px solid #4c2b72;
+
       border-radius: 12px;
 
       padding: 6px;
@@ -146,14 +230,20 @@
         0 10px 30px rgba(0, 0, 0, 0.45);
 
       z-index: 2000;
+
     }
 
+
     .profile-menu.show {
+
       display: block;
+
     }
+
 
     .profile-menu a,
     .profile-menu button {
+
       display: block;
 
       width: 100%;
@@ -167,6 +257,7 @@
       color: white;
 
       text-align: left;
+
       text-decoration: none;
 
       border-radius: 8px;
@@ -174,28 +265,38 @@
       cursor: pointer;
 
       font-size: 14px;
+
     }
+
 
     .profile-menu a:hover,
     .profile-menu button:hover {
+
       background: #302044;
+
     }
+
 
     /* =========================
        HERO
     ========================= */
 
     .hero {
+
       max-width: 900px;
 
       margin: 0 auto;
 
-      padding: 70px 25px 45px;
+      padding:
+        70px 25px 45px;
 
       text-align: center;
+
     }
 
+
     .hero h1 {
+
       font-size: 48px;
 
       margin-bottom: 15px;
@@ -209,10 +310,14 @@
         );
 
       -webkit-background-clip: text;
+
       -webkit-text-fill-color: transparent;
+
     }
 
+
     .hero p {
+
       color: #b8a9ce;
 
       font-size: 17px;
@@ -222,28 +327,33 @@
       max-width: 700px;
 
       margin: auto;
+
     }
 
+
     /* =========================
-       MAIN
+       CONTAINER
     ========================= */
 
     .container {
+
       max-width: 900px;
 
       margin: 0 auto;
 
-      padding: 0 25px 80px;
+      padding:
+        0 25px 80px;
+
     }
 
-    /* =========================
-       SECTIONS
-    ========================= */
 
     .section {
-      background: rgba(25, 13, 41, 0.9);
 
-      border: 1px solid rgba(139, 92, 246, 0.3);
+      background:
+        rgba(25, 13, 41, 0.9);
+
+      border:
+        1px solid rgba(139, 92, 246, 0.3);
 
       border-radius: 18px;
 
@@ -253,27 +363,36 @@
 
       box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.2);
+
     }
 
+
     .section h2 {
+
       font-size: 25px;
 
       margin-bottom: 8px;
+
     }
 
+
     .section-description {
+
       color: #9f91ae;
 
       line-height: 1.6;
 
       margin-bottom: 25px;
+
     }
 
+
     /* =========================
-       EDITION
+       EDITION SELECTION
     ========================= */
 
     .edition-grid {
+
       display: grid;
 
       grid-template-columns:
@@ -282,43 +401,60 @@
       gap: 15px;
 
       margin-bottom: 30px;
+
     }
 
+
     .edition-option {
+
       position: relative;
 
       cursor: pointer;
+
     }
 
+
     .edition-option input {
+
       position: absolute;
 
       opacity: 0;
 
       pointer-events: none;
+
     }
 
+
     .edition-tile {
+
       padding: 22px;
 
       background: #140b21;
 
-      border: 2px solid #35204d;
+      border:
+        2px solid #35204d;
 
       border-radius: 14px;
 
       text-align: center;
 
       transition: 0.2s;
+
     }
+
 
     .edition-tile:hover {
+
       border-color: #7045a5;
 
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
+
     }
 
+
     .edition-title {
+
       display: block;
 
       font-size: 20px;
@@ -326,17 +462,25 @@
       font-weight: 800;
 
       margin-bottom: 6px;
+
     }
 
+
     .edition-subtitle {
+
       display: block;
 
       color: #91839f;
 
       font-size: 13px;
+
     }
 
-    .edition-option input:checked + .edition-tile {
+
+    .edition-option
+    input:checked
+    + .edition-tile {
+
       border-color: #8b5cf6;
 
       background:
@@ -347,58 +491,83 @@
         );
 
       box-shadow:
-        0 0 0 2px rgba(139, 92, 246, 0.1),
-        0 10px 30px rgba(124, 58, 237, 0.15);
+        0 0 0 2px
+        rgba(139, 92, 246, 0.1),
+
+        0 10px 30px
+        rgba(124, 58, 237, 0.15);
+
     }
+
 
     /* =========================
        PRICING
     ========================= */
 
     .pricing-grid {
+
       display: grid;
 
       grid-template-columns:
         repeat(3, 1fr);
 
       gap: 15px;
+
     }
 
+
     .pricing-option {
+
       position: relative;
 
       cursor: pointer;
+
     }
 
+
     .pricing-option input {
+
       position: absolute;
 
       opacity: 0;
 
       pointer-events: none;
+
     }
 
+
     .pricing-tile {
+
       height: 100%;
 
       padding: 22px;
 
       background: #140b21;
 
-      border: 2px solid #35204d;
+      border:
+        2px solid #35204d;
 
       border-radius: 14px;
 
       transition: 0.2s;
+
     }
+
 
     .pricing-tile:hover {
+
       border-color: #7045a5;
 
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
+
     }
 
-    .pricing-option input:checked + .pricing-tile {
+
+    .pricing-option
+    input:checked
+    + .pricing-tile {
+
       border-color: #8b5cf6;
 
       background:
@@ -409,17 +578,26 @@
         );
 
       box-shadow:
-        0 0 0 2px rgba(139, 92, 246, 0.1),
-        0 10px 30px rgba(124, 58, 237, 0.15);
+        0 0 0 2px
+        rgba(139, 92, 246, 0.1),
+
+        0 10px 30px
+        rgba(124, 58, 237, 0.15);
+
     }
 
+
     .pricing-tile h3 {
+
       font-size: 20px;
 
       margin-bottom: 5px;
+
     }
 
+
     .price {
+
       color: #a78bfa;
 
       font-size: 22px;
@@ -427,13 +605,19 @@
       font-weight: 800;
 
       margin-bottom: 15px;
+
     }
+
 
     .pricing-tile ul {
+
       list-style: none;
+
     }
 
+
     .pricing-tile li {
+
       color: #a99bb9;
 
       font-size: 13px;
@@ -445,9 +629,12 @@
       padding-left: 16px;
 
       position: relative;
+
     }
 
+
     .pricing-tile li::before {
+
       content: "•";
 
       position: absolute;
@@ -455,9 +642,12 @@
       left: 0;
 
       color: #8b5cf6;
+
     }
 
+
     .pricing-note {
+
       margin-top: 20px;
 
       padding: 15px;
@@ -475,51 +665,71 @@
       font-size: 13px;
 
       line-height: 1.6;
+
     }
+
 
     /* =========================
        FORM
     ========================= */
 
     .form-grid {
+
       display: grid;
 
       grid-template-columns:
         repeat(2, 1fr);
 
       gap: 20px;
+
     }
 
+
     .form-group {
+
       display: flex;
 
       flex-direction: column;
 
       gap: 8px;
+
     }
+
 
     .form-group.full {
-      grid-column: 1 / -1;
+
+      grid-column:
+        1 / -1;
+
     }
 
+
     label {
+
       font-size: 14px;
 
       font-weight: 700;
 
       color: #ddd2eb;
+
     }
 
+
     .required {
+
       color: #a78bfa;
+
     }
+
 
     input,
     select,
     textarea {
+
       width: 100%;
 
-      border: 1px solid #41255e;
+      border:
+        1px solid #41255e;
 
       background: #140b21;
 
@@ -534,39 +744,74 @@
       outline: none;
 
       transition: 0.2s;
+
     }
+
 
     input:focus,
     select:focus,
     textarea:focus {
+
       border-color: #8b5cf6;
 
       box-shadow:
-        0 0 0 3px rgba(139, 92, 246, 0.12);
+        0 0 0 3px
+        rgba(139, 92, 246, 0.12);
+
     }
+
 
     input::placeholder,
     textarea::placeholder {
+
       color: #6f627d;
+
     }
+
 
     select {
+
       cursor: pointer;
+
     }
 
+
+    /* =========================
+       DISABLED BEDROCK DROPDOWN
+    ========================= */
+
+    select:disabled {
+
+      background: #0d0913;
+
+      color: #62586d;
+
+      border-color: #2b2035;
+
+      cursor: not-allowed;
+
+      opacity: 0.65;
+
+    }
+
+
     textarea {
+
       min-height: 160px;
 
       resize: vertical;
 
       line-height: 1.5;
+
     }
+
 
     /* =========================
        CANNOT DO
     ========================= */
 
     .cannot-list {
+
       list-style: none;
 
       display: grid;
@@ -575,9 +820,12 @@
         repeat(2, 1fr);
 
       gap: 10px;
+
     }
 
+
     .cannot-list li {
+
       padding: 13px 15px;
 
       background:
@@ -591,21 +839,27 @@
       color: #a99bb9;
 
       font-size: 14px;
+
     }
 
+
     .cannot-list li::before {
+
       content: "✕";
 
       color: #a78bfa;
 
       margin-right: 9px;
+
     }
+
 
     /* =========================
        PAYMENT
     ========================= */
 
     .payment-box {
+
       padding: 20px;
 
       background:
@@ -615,21 +869,30 @@
         1px solid rgba(139, 92, 246, 0.22);
 
       border-radius: 12px;
+
     }
+
 
     .payment-box strong {
+
       color: #c4b5fd;
+
     }
 
+
     .payment-box p {
+
       color: #aaa0b8;
 
       line-height: 1.7;
 
       font-size: 14px;
+
     }
 
+
     .payment-methods {
+
       display: flex;
 
       flex-wrap: wrap;
@@ -637,9 +900,12 @@
       gap: 8px;
 
       margin-top: 12px;
+
     }
 
+
     .payment-tag {
+
       padding: 7px 10px;
 
       border-radius: 7px;
@@ -649,13 +915,16 @@
       color: #9f91ae;
 
       font-size: 12px;
+
     }
+
 
     /* =========================
        SUBMIT
     ========================= */
 
     .submit-button {
+
       width: 100%;
 
       margin-top: 25px;
@@ -684,21 +953,30 @@
       transition: 0.2s;
 
       box-shadow:
-        0 10px 25px rgba(124, 58, 237, 0.25);
+        0 10px 25px
+        rgba(124, 58, 237, 0.25);
+
     }
+
 
     .submit-button:hover {
-      transform: translateY(-2px);
+
+      transform:
+        translateY(-2px);
 
       box-shadow:
-        0 15px 30px rgba(124, 58, 237, 0.35);
+        0 15px 30px
+        rgba(124, 58, 237, 0.35);
+
     }
+
 
     /* =========================
        FOOTER
     ========================= */
 
     footer {
+
       text-align: center;
 
       padding: 30px 20px;
@@ -709,7 +987,9 @@
       color: #766981;
 
       font-size: 13px;
+
     }
+
 
     /* =========================
        MOBILE
@@ -718,59 +998,107 @@
     @media (max-width: 800px) {
 
       nav {
-        padding: 14px 18px;
+
+        padding:
+          14px 18px;
+
       }
+
 
       .logo {
+
         font-size: 19px;
+
       }
+
 
       .back-home {
+
         display: none;
+
       }
+
 
       .hero {
+
         padding-top: 50px;
+
       }
+
 
       .hero h1 {
+
         font-size: 36px;
+
       }
+
 
       .edition-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
 
       .pricing-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
 
       .form-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
 
       .form-group.full {
+
         grid-column: auto;
+
       }
+
 
       .cannot-list {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
 
       .section {
-        padding: 22px 18px;
+
+        padding:
+          22px 18px;
+
       }
+
 
       #navUsername {
+
         display: none;
+
       }
 
+
       .profile-button {
+
         padding-right: 7px;
+
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
@@ -781,17 +1109,35 @@
 
   <nav>
 
-    <a href="/" class="logo">
-      Blemm <span>Studios</span>
+
+    <a
+      href="/"
+      class="logo"
+    >
+
+      Blemm
+      <span>
+        Studios
+      </span>
+
     </a>
+
 
     <div class="nav-right">
 
-      <a href="/" class="back-home">
+
+      <a
+        href="/"
+        class="back-home"
+      >
+
         ← Back to Home
+
       </a>
 
+
       <div class="profile-wrapper">
+
 
         <button
           class="profile-button"
@@ -805,9 +1151,11 @@
             alt="Profile"
           >
 
+
           <span id="navUsername">
             Loading...
           </span>
+
 
           <span class="arrow">
             ▼
@@ -815,27 +1163,36 @@
 
         </button>
 
+
         <div
           class="profile-menu"
           id="profileMenu"
         >
 
+
           <a href="/profile.html">
             Profile
           </a>
+
 
           <button
             type="button"
             id="logoutButton"
           >
+
             Log out
+
           </button>
+
 
         </div>
 
+
       </div>
 
+
     </div>
+
 
   </nav>
 
@@ -846,16 +1203,21 @@
 
   <section class="hero">
 
+
     <h1>
       Minecraft Commissions
     </h1>
 
+
     <p>
+
       Need something custom for your Minecraft
       server or world? Tell me what you need and
       I'll review your request and give you a price
       before beginning.
+
     </p>
+
 
   </section>
 
@@ -869,27 +1231,28 @@
 
     <section class="section">
 
+
       <h2>
         Commission Options
       </h2>
 
+
       <p class="section-description">
+
         Start by selecting your Minecraft edition,
         then choose the commission size that best
         matches your project.
+
       </p>
 
 
-      <!-- =========================
-           EDITION
-      ========================= -->
+      <!-- EDITION -->
 
       <div class="edition-grid">
 
 
-        <!-- JAVA -->
-
         <label class="edition-option">
+
 
           <input
             type="radio"
@@ -900,24 +1263,28 @@
             required
           >
 
+
           <div class="edition-tile">
+
 
             <span class="edition-title">
               ☕ Java Edition
             </span>
 
+
             <span class="edition-subtitle">
               Normal commission pricing
             </span>
 
+
           </div>
+
 
         </label>
 
 
-        <!-- BEDROCK -->
-
         <label class="edition-option">
+
 
           <input
             type="radio"
@@ -926,34 +1293,41 @@
             form="commissionForm"
           >
 
+
           <div class="edition-tile">
+
 
             <span class="edition-title">
               🟩 Bedrock Edition
             </span>
 
+
             <span class="edition-subtitle">
               +$2 due to additional complexity
             </span>
 
+
           </div>
 
+
         </label>
+
 
       </div>
 
 
-      <!-- =========================
-           PRICING
-      ========================= -->
+      <!-- PRICING -->
 
       <h2>
         Choose a Commission Size
       </h2>
 
+
       <p class="section-description">
+
         Select the option that best matches the size
         and complexity of your project.
+
       </p>
 
 
@@ -964,6 +1338,7 @@
 
         <label class="pricing-option">
 
+
           <input
             type="radio"
             name="commission_size"
@@ -972,18 +1347,24 @@
             required
           >
 
+
           <div class="pricing-tile">
+
 
             <h3>
               SMALL
             </h3>
 
+
             <div
               class="price"
               id="smallPrice"
             >
+
               $3–$10
+
             </div>
+
 
             <ul>
 
@@ -1013,7 +1394,9 @@
 
             </ul>
 
+
           </div>
+
 
         </label>
 
@@ -1022,6 +1405,7 @@
 
         <label class="pricing-option">
 
+
           <input
             type="radio"
             name="commission_size"
@@ -1029,18 +1413,24 @@
             form="commissionForm"
           >
 
+
           <div class="pricing-tile">
+
 
             <h3>
               MEDIUM
             </h3>
 
+
             <div
               class="price"
               id="mediumPrice"
             >
+
               $10–$30
+
             </div>
+
 
             <ul>
 
@@ -1070,7 +1460,9 @@
 
             </ul>
 
+
           </div>
+
 
         </label>
 
@@ -1079,6 +1471,7 @@
 
         <label class="pricing-option">
 
+
           <input
             type="radio"
             name="commission_size"
@@ -1086,18 +1479,24 @@
             form="commissionForm"
           >
 
+
           <div class="pricing-tile">
+
 
             <h3>
               LARGE
             </h3>
 
+
             <div
               class="price"
               id="largePrice"
             >
+
               $30–$75+
+
             </div>
+
 
             <ul>
 
@@ -1127,24 +1526,31 @@
 
             </ul>
 
+
           </div>
 
+
         </label>
+
 
       </div>
 
 
       <div class="pricing-note">
 
+
         <strong>
           Pricing note:
         </strong>
+
 
         Prices may change depending on the
         complexity of your request. I will give you
         the price before starting.
 
+
       </div>
+
 
     </section>
 
@@ -1155,34 +1561,45 @@
 
     <section class="section">
 
+
       <h2>
         What I Cannot Do
       </h2>
 
+
       <p class="section-description">
+
         Please make sure your project does not
         require any of the following.
+
       </p>
 
+
       <ul class="cannot-list">
+
 
         <li>
           Texture packs
         </li>
 
+
         <li>
           Advanced GUI systems
         </li>
+
 
         <li>
           Projects that require custom textures/assets
         </li>
 
+
         <li>
           Extremely complex systems beyond my experience
         </li>
 
+
       </ul>
+
 
     </section>
 
@@ -1193,16 +1610,22 @@
 
     <section class="section">
 
+
       <h2>
         Payment
       </h2>
 
+
       <p class="section-description">
+
         Please read this before submitting a
         commission request.
+
       </p>
 
+
       <div class="payment-box">
+
 
         <p>
 
@@ -1212,29 +1635,37 @@
 
         </p>
 
+
         <div class="payment-methods">
+
 
           <span class="payment-tag">
             No PayPal
           </span>
 
+
           <span class="payment-tag">
             No Cash App
           </span>
+
 
           <span class="payment-tag">
             No Venmo
           </span>
 
+
           <span class="payment-tag">
             No Crypto
           </span>
+
 
           <span class="payment-tag">
             No Other Payment Methods
           </span>
 
+
         </div>
+
 
         <p style="margin-top: 14px;">
 
@@ -1243,7 +1674,9 @@
 
         </p>
 
+
       </div>
+
 
     </section>
 
@@ -1254,14 +1687,18 @@
 
     <section class="section">
 
+
       <h2>
         Commission Details
       </h2>
 
+
       <p class="section-description">
+
         Fill out the information below. Your Discord
         information is automatically attached to your
         request.
+
       </p>
 
 
@@ -1272,9 +1709,9 @@
       >
 
 
-        <!-- =========================
-             HIDDEN DISCORD INFORMATION
-        ========================= -->
+        <!--
+          Automatically filled from /api/session.
+        -->
 
         <input
           type="hidden"
@@ -1282,6 +1719,7 @@
           name="discord_username"
           value=""
         >
+
 
         <input
           type="hidden"
@@ -1291,17 +1729,40 @@
         >
 
 
+        <!--
+          Used to submit Bedrock even though
+          the visible Server Software dropdown
+          becomes disabled.
+        -->
+
+        <input
+          type="hidden"
+          id="bedrockServerSoftware"
+          name="server_software"
+          value=""
+        >
+
+
         <div class="form-grid">
 
 
-          <!-- MINECRAFT VERSION -->
+          <!-- =========================
+               MINECRAFT VERSION
+          ========================= -->
 
           <div class="form-group">
 
+
             <label for="minecraft_version">
+
               Minecraft Version
-              <span class="required">*</span>
+
+              <span class="required">
+                *
+              </span>
+
             </label>
+
 
             <select
               id="minecraft_version"
@@ -1309,159 +1770,206 @@
               required
             >
 
+
               <option value="">
                 Select a version
               </option>
+
 
               <option value="1.26+">
                 1.26+
               </option>
 
+
               <option value="1.21.11">
                 1.21.11
               </option>
+
 
               <option value="1.21.10">
                 1.21.10
               </option>
 
+
               <option value="1.21.9">
                 1.21.9
               </option>
+
 
               <option value="1.21.8">
                 1.21.8
               </option>
 
+
               <option value="1.21.7">
                 1.21.7
               </option>
+
 
               <option value="1.21.6">
                 1.21.6
               </option>
 
+
               <option value="1.21.5">
                 1.21.5
               </option>
+
 
               <option value="1.21.4">
                 1.21.4
               </option>
 
+
               <option value="1.21.3">
                 1.21.3
               </option>
+
 
               <option value="1.21.2">
                 1.21.2
               </option>
 
+
               <option value="1.21.1">
                 1.21.1
               </option>
+
 
               <option value="1.21">
                 1.21
               </option>
 
+
               <option value="1.20.6">
                 1.20.6
               </option>
+
 
               <option value="1.20.4">
                 1.20.4
               </option>
 
+
               <option value="1.20.2">
                 1.20.2
               </option>
+
 
               <option value="1.20.1">
                 1.20.1
               </option>
 
+
               <option value="Other">
                 Other
               </option>
 
+
             </select>
+
 
           </div>
 
 
-          <!-- SERVER SOFTWARE -->
+          <!-- =========================
+               SERVER SOFTWARE
+          ========================= -->
 
           <div class="form-group">
 
+
             <label for="server_software">
+
               Server Software
+
             </label>
+
 
             <select
               id="server_software"
-              name="server_software"
+              name="server_software_visible"
             >
+
 
               <option value="">
                 Select server software
               </option>
 
+
               <option value="Paper">
                 Paper
               </option>
+
 
               <option value="Spigot">
                 Spigot
               </option>
 
+
               <option value="Purpur">
                 Purpur
               </option>
+
 
               <option value="Folia">
                 Folia
               </option>
 
+
               <option value="Vanilla">
                 Vanilla
               </option>
+
 
               <option value="Fabric">
                 Fabric
               </option>
 
+
               <option value="Forge">
                 Forge
               </option>
+
 
               <option value="NeoForge">
                 NeoForge
               </option>
 
+
               <option value="Other">
                 Other
               </option>
+
 
               <option value="Not Applicable">
                 Not Applicable
               </option>
 
+
             </select>
+
 
           </div>
 
 
-          <!-- WHAT YOU WANT -->
+          <!-- =========================
+               PROJECT
+          ========================= -->
 
           <div class="form-group full">
+
 
             <label for="project">
 
               What You Want Made
-              <span class="required">*</span>
+
+              <span class="required">
+                *
+              </span>
 
             </label>
+
 
             <textarea
               id="project"
@@ -1470,16 +1978,23 @@
               required
             ></textarea>
 
+
           </div>
 
 
-          <!-- ADDITIONAL DETAILS -->
+          <!-- =========================
+               ADDITIONAL DETAILS
+          ========================= -->
 
           <div class="form-group full">
 
+
             <label for="additional">
+
               Additional Details
+
             </label>
+
 
             <textarea
               id="additional"
@@ -1487,22 +2002,25 @@
               placeholder="Anything else I should know about your project?"
             ></textarea>
 
+
           </div>
 
 
         </div>
 
 
-        <!-- SUBMIT -->
-
         <button
           type="submit"
           class="submit-button"
         >
+
           Submit Commission Request
+
         </button>
 
+
       </form>
+
 
     </section>
 
@@ -1522,31 +2040,38 @@
   </footer>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================= -->
-
   <script>
+
 
     /* =========================
        PROFILE DROPDOWN
     ========================= */
 
     const profileButton =
-      document.getElementById("profileButton");
+      document.getElementById(
+        "profileButton"
+      );
+
 
     const profileMenu =
-      document.getElementById("profileMenu");
+      document.getElementById(
+        "profileMenu"
+      );
+
 
     const logoutButton =
-      document.getElementById("logoutButton");
+      document.getElementById(
+        "logoutButton"
+      );
 
 
     profileButton.addEventListener(
       "click",
       function () {
 
-        profileMenu.classList.toggle("show");
+        profileMenu.classList.toggle(
+          "show"
+        );
 
       }
     );
@@ -1598,6 +2123,7 @@
 
         }
 
+
         window.location.href =
           "/login.html";
 
@@ -1614,7 +2140,10 @@
       try {
 
         const response =
-          await fetch("/api/session");
+          await fetch(
+            "/api/session"
+          );
+
 
         const user =
           await response.json();
@@ -1630,9 +2159,7 @@
         }
 
 
-        /* =========================
-           DISPLAY USERNAME
-        ========================= */
+        /* USERNAME */
 
         document.getElementById(
           "navUsername"
@@ -1640,9 +2167,7 @@
           user.username;
 
 
-        /* =========================
-           AVATAR
-        ========================= */
+        /* AVATAR */
 
         const avatar =
           document.getElementById(
@@ -1663,9 +2188,7 @@
         }
 
 
-        /* =========================
-           HIDDEN DISCORD DATA
-        ========================= */
+        /* HIDDEN DISCORD DATA */
 
         document.getElementById(
           "discordUsername"
@@ -1695,7 +2218,7 @@
 
 
     /* =========================
-       EDITION / PRICING
+       DYNAMIC PRICING
     ========================= */
 
     const editionInputs =
@@ -1709,10 +2232,12 @@
         "smallPrice"
       );
 
+
     const mediumPrice =
       document.getElementById(
         "mediumPrice"
       );
+
 
     const largePrice =
       document.getElementById(
@@ -1729,7 +2254,9 @@
 
 
       if (!selectedEdition) {
+
         return;
+
       }
 
 
@@ -1738,22 +2265,29 @@
         "Bedrock"
       ) {
 
+
         smallPrice.textContent =
           "$5–$12";
+
 
         mediumPrice.textContent =
           "$12–$32";
 
+
         largePrice.textContent =
           "$32–$77+";
 
+
       } else {
+
 
         smallPrice.textContent =
           "$3–$10";
 
+
         mediumPrice.textContent =
           "$10–$30";
+
 
         largePrice.textContent =
           "$30–$75+";
@@ -1763,21 +2297,146 @@
     }
 
 
+    /* =========================
+       SERVER SOFTWARE
+    ========================= */
+
+    const serverSoftware =
+      document.getElementById(
+        "server_software"
+      );
+
+
+    const bedrockServerSoftware =
+      document.getElementById(
+        "bedrockServerSoftware"
+      );
+
+
+    const serverSoftwareOptions =
+      serverSoftware.innerHTML;
+
+
+    function updateServerSoftware() {
+
+      const selectedEdition =
+        document.querySelector(
+          'input[name="edition"]:checked'
+        );
+
+
+      if (!selectedEdition) {
+
+        return;
+
+      }
+
+
+      if (
+        selectedEdition.value ===
+        "Bedrock"
+      ) {
+
+
+        /*
+          Bedrock does not use
+          Java server software.
+        */
+
+
+        serverSoftware.innerHTML = `
+
+          <option value="Bedrock">
+            Bedrock
+          </option>
+
+        `;
+
+
+        serverSoftware.value =
+          "Bedrock";
+
+
+        serverSoftware.disabled =
+          true;
+
+
+        /*
+          Store Bedrock in the
+          actual submitted field.
+        */
+
+        bedrockServerSoftware.value =
+          "Bedrock";
+
+
+      } else {
+
+
+        /*
+          Restore Java options.
+        */
+
+
+        serverSoftware.innerHTML =
+          serverSoftwareOptions;
+
+
+        serverSoftware.value =
+          "";
+
+
+        serverSoftware.disabled =
+          false;
+
+
+        /*
+          Clear the hidden
+          Bedrock value.
+        */
+
+        bedrockServerSoftware.value =
+          "";
+
+      }
+
+    }
+
+
+    /* =========================
+       EDITION CHANGE
+    ========================= */
+
     editionInputs.forEach(
       function (input) {
 
         input.addEventListener(
           "change",
-          updatePrices
+          function () {
+
+            updatePrices();
+
+            updateServerSoftware();
+
+          }
         );
 
       }
     );
 
 
+    /* =========================
+       INITIAL STATE
+    ========================= */
+
     updatePrices();
+
+    updateServerSoftware();
+
 
   </script>
 
+
 </body>
+
 </html>
