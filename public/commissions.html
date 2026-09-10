@@ -1,301 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Commissions | Blemm Studios</title>
 
   <style>
-
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-
-      background: #0d0912;
-
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, #2b1452 0%, #140b22 45%, #0d0716 100%);
       color: white;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
       min-height: 100vh;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-
-    /* ================================
+    /* =========================
        NAVBAR
-    ================================ */
+    ========================= */
 
     nav {
-      height: 72px;
-
-      background: #150d1d;
-
-      border-bottom:
-        1px solid #291832;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
 
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
 
-      padding: 0 7%;
+      padding: 16px 35px;
 
-      position: sticky;
+      background: rgba(15, 8, 25, 0.92);
+      backdrop-filter: blur(12px);
 
-      top: 0;
-
-      z-index: 10;
+      border-bottom: 1px solid rgba(139, 92, 246, 0.25);
     }
 
     .logo {
+      color: white;
+      text-decoration: none;
       font-size: 22px;
-
       font-weight: 800;
+      letter-spacing: 0.5px;
+    }
 
-      color: #a855f7;
+    .logo span {
+      color: #a78bfa;
     }
 
     .nav-right {
       display: flex;
-
       align-items: center;
-
       gap: 15px;
     }
 
-    .home-button {
-      padding:
-        10px 17px;
+    .back-home {
+      color: #c4b5fd;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
 
-      border-radius: 8px;
+    .back-home:hover {
+      color: white;
+    }
 
-      border:
-        1px solid #432552;
+    /* =========================
+       PROFILE
+    ========================= */
 
-      background: #19111f;
+    .profile-wrapper {
+      position: relative;
+    }
 
-      color: #d8c4e2;
+    .profile-button {
+      display: flex;
+      align-items: center;
+      gap: 9px;
 
+      background: #24153d;
+      border: 1px solid #4c2b72;
+
+      color: white;
+
+      padding: 7px 12px 7px 7px;
+
+      border-radius: 12px;
+
+      cursor: pointer;
       font-size: 14px;
-
-      font-weight: 700;
 
       transition: 0.2s;
     }
 
-    .home-button:hover {
-      background: #8b4dcc;
-
-      border-color: #8b4dcc;
-
-      color: white;
+    .profile-button:hover {
+      background: #301b4f;
+      border-color: #7045a5;
     }
 
+    .profile-button img {
+      width: 34px;
+      height: 34px;
 
-    /* ================================
-       PAGE
-    ================================ */
+      border-radius: 50%;
 
-    .page {
+      object-fit: cover;
+
+      background: #35204f;
+    }
+
+    #navUsername {
+      max-width: 140px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .arrow {
+      font-size: 9px;
+      color: #a78bfa;
+    }
+
+    .profile-menu {
+      display: none;
+
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+
+      width: 150px;
+
+      background: #1b102d;
+
+      border: 1px solid #4c2b72;
+
+      border-radius: 12px;
+
+      padding: 6px;
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+
+      z-index: 2000;
+    }
+
+    .profile-menu.show {
+      display: block;
+    }
+
+    .profile-menu a,
+    .profile-menu button {
+      display: block;
+
       width: 100%;
 
+      padding: 10px 12px;
+
+      border: none;
+
+      background: transparent;
+
+      color: white;
+
+      text-align: left;
+
+      text-decoration: none;
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+    }
+
+    .profile-menu a:hover,
+    .profile-menu button:hover {
+      background: #302044;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      text-align: center;
+
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      padding: 75px 25px 45px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+
+      margin-bottom: 15px;
+
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #c4b5fd,
+        #a78bfa
+      );
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #b8a9ce;
+
+      font-size: 17px;
+
+      line-height: 1.7;
+
+      max-width: 650px;
+
+      margin: auto;
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services {
       max-width: 1100px;
 
       margin: 0 auto;
 
-      padding:
-        65px 25px 100px;
-    }
+      padding: 20px 25px 60px;
 
-
-    .page-header {
-      text-align: center;
-
-      margin-bottom: 45px;
-    }
-
-    .page-header h1 {
-      margin:
-        0 0 12px;
-
-      font-size: 42px;
-
-      letter-spacing: -1px;
-    }
-
-    .page-header h1 span {
-      color: #a855f7;
-    }
-
-    .page-header p {
-      max-width: 650px;
-
-      margin: 0 auto;
-
-      color: #a995b4;
-
-      line-height: 1.7;
-
-      font-size: 16px;
-    }
-
-
-    /* ================================
-       SERVICES
-    ================================ */
-
-    .services {
       display: grid;
 
       grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-      gap: 18px;
-
-      margin-bottom: 45px;
-    }
-
-    .service-card {
-      background: #19111f;
-
-      border:
-        1px solid #32203d;
-
-      border-radius: 14px;
-
-      padding: 25px;
-
-      transition: 0.2s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-3px);
-
-      border-color: #7540a5;
-    }
-
-    .service-icon {
-      width: 45px;
-
-      height: 45px;
-
-      border-radius: 10px;
-
-      background: #281633;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      color: #b77aff;
-
-      font-size: 20px;
-
-      font-weight: 800;
-
-      margin-bottom: 17px;
-    }
-
-    .service-card h3 {
-      margin:
-        0 0 8px;
-
-      font-size: 18px;
-    }
-
-    .service-card p {
-      margin: 0;
-
-      color: #9e8ba8;
-
-      line-height: 1.6;
-
-      font-size: 14px;
-    }
-
-
-    /* ================================
-       FORM AREA
-    ================================ */
-
-    .form-wrapper {
-      background: #19111f;
-
-      border:
-        1px solid #32203d;
-
-      border-radius: 16px;
-
-      padding: 35px;
-
-      box-shadow:
-        0 15px 45px
-        rgba(0, 0, 0, 0.25);
-    }
-
-    .form-header {
-      margin-bottom: 30px;
-    }
-
-    .form-header h2 {
-      margin:
-        0 0 8px;
-
-      font-size: 27px;
-    }
-
-    .form-header p {
-      margin: 0;
-
-      color: #a995b4;
-
-      line-height: 1.6;
-
-      font-size: 14px;
-    }
-
-
-    /* ================================
-       FORM
-    ================================ */
-
-    form {
-      display: grid;
+        repeat(3, 1fr);
 
       gap: 20px;
     }
 
-    .form-row {
+    .service-card {
+      background: rgba(31, 17, 50, 0.75);
+
+      border: 1px solid rgba(139, 92, 246, 0.25);
+
+      border-radius: 16px;
+
+      padding: 28px;
+
+      text-align: center;
+
+      transition: 0.25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+
+      border-color: rgba(167, 139, 250, 0.6);
+
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .service-icon {
+      font-size: 34px;
+
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 10px;
+
+      font-size: 20px;
+    }
+
+    .service-card p {
+      color: #aa9bbd;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       FORM SECTION
+    ========================= */
+
+    .form-container {
+      max-width: 850px;
+
+      margin: 0 auto;
+
+      padding: 0 25px 80px;
+    }
+
+    .form-card {
+      background: rgba(25, 13, 41, 0.9);
+
+      border: 1px solid rgba(139, 92, 246, 0.3);
+
+      border-radius: 18px;
+
+      padding: 35px;
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .form-card h2 {
+      font-size: 28px;
+
+      margin-bottom: 8px;
+    }
+
+    .form-subtitle {
+      color: #a99bb9;
+
+      margin-bottom: 30px;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       FORM GRID
+    ========================= */
+
+    .form-grid {
       display: grid;
 
       grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(2, 1fr);
 
-      gap: 18px;
+      gap: 20px;
     }
 
-    .field {
+    .form-group {
       display: flex;
 
       flex-direction: column;
@@ -303,16 +347,20 @@
       gap: 8px;
     }
 
-    .field label {
-      color: #d9cbe0;
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
 
-      font-size: 13px;
+    label {
+      font-size: 14px;
 
       font-weight: 700;
+
+      color: #ddd2eb;
     }
 
     .required {
-      color: #a855f7;
+      color: #a78bfa;
     }
 
     input,
@@ -320,22 +368,15 @@
     textarea {
       width: 100%;
 
-      border:
-        1px solid #3a2844;
+      border: 1px solid #41255e;
 
-      border-radius: 9px;
-
-      background: #110a16;
+      background: #140b21;
 
       color: white;
 
-      padding:
-        13px 14px;
+      border-radius: 10px;
 
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+      padding: 13px 14px;
 
       font-size: 14px;
 
@@ -347,20 +388,15 @@
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: #8b4dcc;
+      border-color: #8b5cf6;
 
       box-shadow:
-        0 0 0 3px
-        rgba(168, 85, 247, 0.10);
+        0 0 0 3px rgba(139, 92, 246, 0.12);
     }
 
     input::placeholder,
     textarea::placeholder {
-      color: #67586e;
-    }
-
-    select {
-      cursor: pointer;
+      color: #6f627d;
     }
 
     textarea {
@@ -368,324 +404,330 @@
 
       resize: vertical;
 
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
+    select {
+      cursor: pointer;
+    }
 
-    /* ================================
+    /* =========================
        CHECKBOX
-    ================================ */
+    ========================= */
 
-    .checkbox {
+    .checkbox-group {
       display: flex;
 
       align-items: flex-start;
 
       gap: 10px;
 
-      padding-top: 2px;
+      margin-top: 5px;
     }
 
-    .checkbox input {
-      width: 17px;
+    .checkbox-group input {
+      width: auto;
 
-      height: 17px;
+      margin-top: 3px;
 
-      margin-top: 2px;
+      accent-color: #8b5cf6;
 
-      accent-color: #a855f7;
-
-      flex-shrink: 0;
+      cursor: pointer;
     }
 
-    .checkbox label {
-      color: #9e8ba8;
-
+    .checkbox-group label {
       font-size: 13px;
+
+      font-weight: normal;
+
+      color: #a99bb9;
 
       line-height: 1.5;
 
       cursor: pointer;
     }
 
-
-    /* ================================
+    /* =========================
        SUBMIT
-    ================================ */
+    ========================= */
 
     .submit-button {
       width: 100%;
 
+      margin-top: 25px;
+
+      padding: 15px;
+
       border: none;
 
-      border-radius: 9px;
+      border-radius: 11px;
 
-      padding:
-        14px 20px;
-
-      background: #8b4dcc;
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #9333ea
+        );
 
       color: white;
 
-      font-size: 15px;
+      font-size: 16px;
 
       font-weight: 800;
 
       cursor: pointer;
 
       transition: 0.2s;
+
+      box-shadow:
+        0 10px 25px rgba(124, 58, 237, 0.25);
     }
 
     .submit-button:hover {
-      background: #a55ee8;
+      transform: translateY(-2px);
 
-      transform: translateY(-1px);
+      box-shadow:
+        0 15px 30px rgba(124, 58, 237, 0.35);
     }
 
-
-    /* ================================
-       NOTICE
-    ================================ */
-
-    .notice {
-      margin-top: 25px;
-
-      padding: 17px;
-
-      background: #150d1d;
-
-      border:
-        1px solid #32203d;
-
-      border-radius: 10px;
-
-      color: #93809d;
-
-      font-size: 13px;
-
-      line-height: 1.6;
-
-      text-align: center;
+    .submit-button:active {
+      transform: translateY(0);
     }
 
-
-    /* ================================
+    /* =========================
        FOOTER
-    ================================ */
+    ========================= */
 
     footer {
-      background: #09060c;
-
-      border-top:
-        1px solid #211528;
-
-      padding:
-        30px 7%;
-
       text-align: center;
 
-      color: #796b83;
+      padding: 30px 20px;
+
+      border-top: 1px solid rgba(139, 92, 246, 0.15);
+
+      color: #766981;
 
       font-size: 13px;
     }
 
-    .footer-logo {
-      color: #a855f7;
-
-      font-weight: 800;
-    }
-
-
-    /* ================================
+    /* =========================
        MOBILE
-    ================================ */
+    ========================= */
 
     @media (max-width: 800px) {
-
       nav {
-        padding: 0 5%;
-      }
-
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-
-    @media (max-width: 600px) {
-
-      .page {
-        padding:
-          45px 18px 70px;
-      }
-
-      .page-header h1 {
-        font-size: 34px;
-      }
-
-      .form-wrapper {
-        padding: 23px;
+        padding: 14px 18px;
       }
 
       .logo {
         font-size: 19px;
       }
 
-      .home-button {
-        padding:
-          9px 13px;
+      .back-home {
+        display: none;
       }
 
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .form-card {
+        padding: 25px 20px;
+      }
+
+      #navUsername {
+        display: none;
+      }
+
+      .profile-button {
+        padding-right: 7px;
+      }
     }
-
   </style>
-
 </head>
-
 
 <body>
 
-
-  <!-- ================================
+  <!-- =========================
        NAVBAR
-  ================================ -->
+  ========================= -->
 
   <nav>
 
-    <a
-      href="/"
-      class="logo"
-    >
-      Blemm Studios
+    <a href="/" class="logo">
+      Blemm <span>Studios</span>
     </a>
-
 
     <div class="nav-right">
 
-      <a
-        href="/"
-        class="home-button"
-      >
-        Back to Home
+      <a href="/" class="back-home">
+        ← Back to Home
       </a>
+
+      <div class="profile-wrapper">
+
+        <button
+          class="profile-button"
+          id="profileButton"
+          type="button"
+        >
+
+          <img
+            id="navAvatar"
+            src=""
+            alt="Profile"
+          >
+
+          <span id="navUsername">
+            Loading...
+          </span>
+
+          <span class="arrow">
+            ▼
+          </span>
+
+        </button>
+
+        <div
+          class="profile-menu"
+          id="profileMenu"
+        >
+
+          <a href="/profile.html">
+            Profile
+          </a>
+
+          <button
+            type="button"
+            id="logoutButton"
+          >
+            Log out
+          </button>
+
+        </div>
+
+      </div>
 
     </div>
 
   </nav>
 
 
-  <!-- ================================
-       PAGE
-  ================================ -->
+  <!-- =========================
+       HERO
+  ========================= -->
 
-  <main class="page">
+  <section class="hero">
+
+    <h1>
+      Start a Commission
+    </h1>
+
+    <p>
+      Have an idea for your Minecraft server?
+      Tell us what you need and we'll take a look
+      at your project. From custom plugins to
+      complete server systems, Blemm Studios can
+      help bring your idea to life.
+    </p>
+
+  </section>
 
 
-    <section class="page-header">
+  <!-- =========================
+       SERVICES
+  ========================= -->
 
-      <h1>
-        Start a <span>Commission</span>
-      </h1>
+  <section class="services">
+
+    <div class="service-card">
+
+      <div class="service-icon">
+        ⚙️
+      </div>
+
+      <h3>
+        Custom Plugins
+      </h3>
 
       <p>
-        Looking for a custom Minecraft plugin or
-        server solution? Tell us what you're looking
-        for and we'll get back to you with the next
-        steps.
+        Custom Minecraft plugins designed
+        specifically around your server and
+        gameplay ideas.
       </p>
 
-    </section>
+    </div>
 
 
-    <!-- ================================
-         SERVICES
-    ================================ -->
+    <div class="service-card">
 
-    <section class="services">
-
-
-      <div class="service-card">
-
-        <div class="service-icon">
-          P
-        </div>
-
-        <h3>
-          Custom Plugins
-        </h3>
-
-        <p>
-          Custom Minecraft plugins built around
-          your server's exact needs.
-        </p>
-
+      <div class="service-icon">
+        🖥️
       </div>
 
+      <h3>
+        Server Systems
+      </h3>
 
-      <div class="service-card">
+      <p>
+        Large-scale server systems including
+        gameplay mechanics, management tools,
+        and unique server features.
+      </p>
 
-        <div class="service-icon">
-          S
-        </div>
+    </div>
 
-        <h3>
-          Server Systems
-        </h3>
 
-        <p>
-          Large-scale systems and features designed
-          to work together on your server.
-        </p>
+    <div class="service-card">
 
+      <div class="service-icon">
+        ✨
       </div>
 
+      <h3>
+        Custom Features
+      </h3>
 
-      <div class="service-card">
+      <p>
+        Need something unique? Tell us your idea
+        and we'll work with you to figure out
+        the best way to build it.
+      </p>
 
-        <div class="service-icon">
-          C
-        </div>
+    </div>
 
-        <h3>
-          Custom Features
-        </h3>
-
-        <p>
-          Unique mechanics, commands, GUIs,
-          integrations, and other custom features.
-        </p>
-
-      </div>
+  </section>
 
 
-    </section>
+  <!-- =========================
+       COMMISSION FORM
+  ========================= -->
 
+  <section class="form-container">
 
-    <!-- ================================
-         COMMISSION FORM
-    ================================ -->
+    <div class="form-card">
 
-    <section class="form-wrapper">
+      <h2>
+        Commission Details
+      </h2>
 
-
-      <div class="form-header">
-
-        <h2>
-          Commission Request
-        </h2>
-
-        <p>
-          Fill out as much information as you can.
-          The more details you provide, the easier
-          it is for us to understand your project.
-        </p>
-
-      </div>
+      <p class="form-subtitle">
+        Fill out as much information as possible.
+        The more details you provide, the easier it
+        will be for us to understand your project.
+      </p>
 
 
       <form
@@ -693,17 +735,15 @@
         method="POST"
       >
 
-
-        <!-- NAME + EMAIL -->
-
-        <div class="form-row">
+        <div class="form-grid">
 
 
-          <div class="field">
+          <!-- NAME -->
+
+          <div class="form-group">
 
             <label for="name">
-              Name
-              <span class="required">*</span>
+              Name <span class="required">*</span>
             </label>
 
             <input
@@ -717,11 +757,12 @@
           </div>
 
 
-          <div class="field">
+          <!-- EMAIL -->
+
+          <div class="form-group">
 
             <label for="email">
-              Email
-              <span class="required">*</span>
+              Email <span class="required">*</span>
             </label>
 
             <input
@@ -735,33 +776,28 @@
           </div>
 
 
-        </div>
+          <!-- DISCORD -->
 
-
-        <!-- DISCORD + SERVER -->
-
-        <div class="form-row">
-
-
-          <div class="field">
+          <div class="form-group">
 
             <label for="discord">
-              Discord Username
-              <span class="required">*</span>
+              Discord Username <span class="required">*</span>
             </label>
 
             <input
               type="text"
               id="discord"
               name="discord"
-              placeholder="yourusername"
+              placeholder="username"
               required
             >
 
           </div>
 
 
-          <div class="field">
+          <!-- SERVER NAME -->
+
+          <div class="form-group">
 
             <label for="server">
               Server Name
@@ -777,23 +813,16 @@
           </div>
 
 
-        </div>
+          <!-- COMMISSION TYPE -->
 
+          <div class="form-group">
 
-        <!-- COMMISSION TYPE + BUDGET -->
-
-        <div class="form-row">
-
-
-          <div class="field">
-
-            <label for="type">
-              Commission Type
-              <span class="required">*</span>
+            <label for="commission_type">
+              Commission Type <span class="required">*</span>
             </label>
 
             <select
-              id="type"
+              id="commission_type"
               name="commission_type"
               required
             >
@@ -827,7 +856,9 @@
           </div>
 
 
-          <div class="field">
+          <!-- BUDGET -->
+
+          <div class="form-group">
 
             <label for="budget">
               Budget
@@ -871,50 +902,45 @@
           </div>
 
 
-        </div>
+          <!-- PROJECT DESCRIPTION -->
+
+          <div class="form-group full">
+
+            <label for="description">
+              Project Description <span class="required">*</span>
+            </label>
+
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Tell us about your project. What should it do? How should players interact with it? Include as many details as possible."
+              required
+            ></textarea>
+
+          </div>
 
 
-        <!-- DESCRIPTION -->
+          <!-- MINECRAFT VERSION -->
 
-        <div class="field">
+          <div class="form-group">
 
-          <label for="description">
-            Project Description
-            <span class="required">*</span>
-          </label>
-
-          <textarea
-            id="description"
-            name="project_description"
-            placeholder="Tell us what you want built, how it should work, commands you need, examples of similar plugins, etc."
-            required
-          ></textarea>
-
-        </div>
-
-
-        <!-- VERSION -->
-
-        <div class="form-row">
-
-
-          <div class="field">
-
-            <label for="version">
+            <label for="minecraft_version">
               Minecraft Version
             </label>
 
             <input
               type="text"
-              id="version"
+              id="minecraft_version"
               name="minecraft_version"
-              placeholder="Example: 1.21.8"
+              placeholder="e.g. 1.21.8"
             >
 
           </div>
 
 
-          <div class="field">
+          <!-- SERVER PLATFORM -->
+
+          <div class="form-group">
 
             <label for="platform">
               Server Platform
@@ -922,11 +948,11 @@
 
             <select
               id="platform"
-              name="server_platform"
+              name="platform"
             >
 
               <option value="">
-                Select platform
+                Select a platform
               </option>
 
               <option value="Paper">
@@ -958,62 +984,65 @@
           </div>
 
 
-        </div>
+          <!-- DEADLINE -->
+
+          <div class="form-group">
+
+            <label for="deadline">
+              Desired Deadline
+            </label>
+
+            <input
+              type="text"
+              id="deadline"
+              name="deadline"
+              placeholder="e.g. 2 weeks, October 1st"
+            >
+
+          </div>
 
 
-        <!-- DEADLINE -->
+          <!-- ADDITIONAL INFO -->
 
-        <div class="field">
+          <div class="form-group full">
 
-          <label for="deadline">
-            Desired Deadline
-          </label>
+            <label for="additional">
+              Additional Information
+            </label>
 
-          <input
-            type="text"
-            id="deadline"
-            name="deadline"
-            placeholder="Example: Within 2 weeks"
-          >
+            <textarea
+              id="additional"
+              name="additional_information"
+              placeholder="Anything else we should know? Links, references, examples, special requirements, etc."
+            ></textarea>
 
-        </div>
-
-
-        <!-- EXTRA INFORMATION -->
-
-        <div class="field">
-
-          <label for="extra">
-            Additional Information
-          </label>
-
-          <textarea
-            id="extra"
-            name="additional_information"
-            placeholder="Anything else we should know?"
-          ></textarea>
-
-        </div>
+          </div>
 
 
-        <!-- AGREEMENT -->
+          <!-- CONTACT PERMISSION -->
 
-        <div class="checkbox">
+          <div class="form-group full">
 
-          <input
-            type="checkbox"
-            id="contact"
-            name="contact_permission"
-            value="yes"
-            required
-          >
+            <div class="checkbox-group">
 
-          <label for="contact">
-            I understand that submitting this form
-            sends my commission request to Blemm Studios
-            and allows the team to contact me regarding
-            this request.
-          </label>
+              <input
+                type="checkbox"
+                id="contact_permission"
+                name="contact_permission"
+                value="Yes"
+                required
+              >
+
+              <label for="contact_permission">
+                I understand that Blemm Studios may contact
+                me using the information provided above
+                regarding this commission.
+              </label>
+
+            </div>
+
+          </div>
+
 
         </div>
 
@@ -1027,42 +1056,196 @@
           Submit Commission Request
         </button>
 
-
       </form>
 
+    </div>
 
-      <div class="notice">
-
-        Please provide as much detail as possible.
-        Commission requests with clear requirements
-        are easier for us to review and estimate.
-
-      </div>
+  </section>
 
 
-    </section>
-
-
-  </main>
-
-
-  <!-- ================================
+  <!-- =========================
        FOOTER
-  ================================ -->
+  ========================= -->
 
   <footer>
 
-    <span class="footer-logo">
-      Blemm Studios
-    </span>
-
-    <br><br>
-
-    © 2026 Blemm Studios
+    © 2026 Blemm Studios.
+    All rights reserved.
 
   </footer>
 
 
-</body>
+  <!-- =========================
+       PROFILE JAVASCRIPT
+  ========================= -->
 
+  <script>
+
+    const profileButton =
+      document.getElementById("profileButton");
+
+    const profileMenu =
+      document.getElementById("profileMenu");
+
+    const logoutButton =
+      document.getElementById("logoutButton");
+
+
+    /*
+      Open / close profile menu
+    */
+
+    profileButton.addEventListener(
+      "click",
+      function () {
+
+        profileMenu.classList.toggle("show");
+
+      }
+    );
+
+
+    /*
+      Close menu when clicking elsewhere
+    */
+
+    document.addEventListener(
+      "click",
+      function (event) {
+
+        if (
+          !event.target.closest(
+            ".profile-wrapper"
+          )
+        ) {
+
+          profileMenu.classList.remove(
+            "show"
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+      Logout
+    */
+
+    logoutButton.addEventListener(
+      "click",
+      async function () {
+
+        try {
+
+          await fetch(
+            "/auth/logout",
+            {
+              method: "POST"
+            }
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Logout request failed:",
+            error
+          );
+
+        }
+
+        window.location.href =
+          "/login.html";
+
+      }
+    );
+
+
+    /*
+      Load Discord profile
+    */
+
+    async function loadProfile() {
+
+      try {
+
+        const response =
+          await fetch("/api/session");
+
+        const user =
+          await response.json();
+
+
+        /*
+          User isn't logged in
+        */
+
+        if (!user.loggedIn) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+
+        }
+
+
+        /*
+          Username
+        */
+
+        document.getElementById(
+          "navUsername"
+        ).textContent =
+          user.username;
+
+
+        /*
+          Avatar
+        */
+
+        const avatar =
+          document.getElementById(
+            "navAvatar"
+          );
+
+
+        if (user.avatar) {
+
+          avatar.src =
+            user.avatar;
+
+        } else {
+
+          /*
+            Discord default avatar
+          */
+
+          avatar.src =
+            `https://cdn.discordapp.com/embed/avatars/${Number(user.id) % 5}.png`;
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Failed to load profile:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /*
+      Start loading profile
+    */
+
+    loadProfile();
+
+  </script>
+
+</body>
 </html>
