@@ -12,27 +12,65 @@ export default {
     const url = new URL(request.url);
     const pathname = url.pathname;
 
-    // Discord login
+    // ================================
+    // DISCORD LOGIN
+    // ================================
+
     if (pathname === "/auth/discord") {
       return startDiscordLogin(env);
     }
 
-    // Discord callback
+    // ================================
+    // DISCORD CALLBACK
+    // ================================
+
     if (pathname === "/auth/callback") {
       return handleDiscordCallback(request, env);
     }
 
-    // Logout
+    // ================================
+    // LOGOUT
+    // ================================
+
     if (pathname === "/auth/logout") {
       return logout();
     }
 
-    // Current Discord user
+    // ================================
+    // CURRENT DISCORD USER
+    // ================================
+
     if (pathname === "/api/session") {
       return getSession(request, env);
     }
 
-    // Protect website pages
+    // ================================
+    // TEMPORARY DISCORD DEBUG
+    // ================================
+
+    if (pathname === "/api/debug-discord") {
+      return new Response(
+        JSON.stringify({
+          clientId: env.DISCORD_CLIENT_ID || null,
+          hasClientSecret: !!env.DISCORD_CLIENT_SECRET,
+          clientSecretLength: env.DISCORD_CLIENT_SECRET
+            ? env.DISCORD_CLIENT_SECRET.length
+            : 0,
+          hasSessionSecret: !!env.SESSION_SECRET
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store"
+          }
+        }
+      );
+    }
+
+    // ================================
+    // PROTECT WEBSITE PAGES
+    // ================================
+
     if (isProtectedPage(pathname)) {
       const session = await getValidSession(request, env);
 
@@ -142,7 +180,37 @@ async function handleDiscordCallback(request, env) {
     );
   }
 
-  // Exchange code for Discord access token
+  // ================================
+  // EXCHANGE CODE FOR ACCESS TOKEN
+  // ================================
+
+  const tokenBody = new URLSearchParams();
+
+  tokenBody.set(
+    "client_id",
+    env.DISCORD_CLIENT_ID
+  );
+
+  tokenBody.set(
+    "client_secret",
+    env.DISCORD_CLIENT_SECRET
+  );
+
+  tokenBody.set(
+    "grant_type",
+    "authorization_code"
+  );
+
+  tokenBody.set(
+    "code",
+    code
+  );
+
+  tokenBody.set(
+    "redirect_uri",
+    DISCORD_REDIRECT_URI
+  );
+
   const tokenResponse = await fetch(
     "https://discord.com/api/oauth2/token",
     {
@@ -153,13 +221,7 @@ async function handleDiscordCallback(request, env) {
           "application/x-www-form-urlencoded"
       },
 
-      body: new URLSearchParams({
-        client_id: env.DISCORD_CLIENT_ID,
-        client_secret: env.DISCORD_CLIENT_SECRET,
-        grant_type: "authorization_code",
-        code: code,
-        redirect_uri: DISCORD_REDIRECT_URI
-      })
+      body: tokenBody.toString()
     }
   );
 
@@ -180,7 +242,10 @@ async function handleDiscordCallback(request, env) {
     );
   }
 
-  // Get Discord account
+  // ================================
+  // GET DISCORD ACCOUNT
+  // ================================
+
   const userResponse = await fetch(
     "https://discord.com/api/v10/users/@me",
     {
@@ -199,9 +264,9 @@ async function handleDiscordCallback(request, env) {
 
   const user = await userResponse.json();
 
-  // IMPORTANT:
   // username = actual Discord username
   // global_name = display name
+
   const session = {
     id: user.id,
     username: user.username,
@@ -234,7 +299,6 @@ async function handleDiscordCallback(request, env) {
     }
   });
 
-  // Add cookies separately
   response.headers.append(
     "Set-Cookie",
     sessionCookie
@@ -379,23 +443,6 @@ function logout() {
 // ================================
 // CRYPTO
 // ================================
-
-function randomString(length) {
-  const bytes =
-    new Uint8Array(length);
-
-  crypto.getRandomValues(bytes);
-
-  return Array.from(bytes)
-    .map(
-      byte =>
-        byte
-          .toString(16)
-          .padStart(2, "0")
-    )
-    .join("");
-}
-
 
 async function sign(value, secret) {
   const key =
@@ -599,6 +646,7 @@ a {
 
 <body>
 <div class="box">
+
 <h1>Login Error</h1>
 
 <p>${message}</p>
